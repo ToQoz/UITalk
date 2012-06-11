@@ -1,0 +1,29 @@
+<%= form_tag("/post", :method => "post", id: :post_form, multipart: true) do %>
+  <div id="title_textfield_box">
+    <%= label_tag(:title, "title", class: :post_form_label) %>
+    <%= text_field_tag(:title, "", id: :title_textfield, class: :post_form_contents) %>
+  </div>
+
+  <div id="body_textarea_box">
+    <%= label_tag(:body, "body", class: :post_form_label) %>
+    <%= text_area_tag(:body, "", id: :body_textarea, class: :post_form_contents) %>
+  </div>
+
+  <div id="image_upload_box">
+    <%= label_tag(:image, "image", class: :post_form_label) %>
+    <%= file_field_tag(:image, class: :post_form_contents) %>
+  </div>
+
+  <%= submit_tag("Post") %>
+<% end %>
+
+<div id="all_post">
+<% @post.each do |p| %>
+  <div class='post'>
+    <h2><%= link_to p.title, { controller: :post, action: :show, id: p.id } %></h2>
+    <p><%= p.user.name if p.user %></p>
+    <p><%= p.body %></p>
+    <p><%= image_tag image_url_by_id(p.id), width: 50, height: 50 %></p>
+</div>
+<% end %>
+</div>

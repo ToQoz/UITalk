@@ -1,0 +1,3 @@
+<% @users.each do |user| %>
+  <%= link_to user.name, { controller: :user, action: :show, name: user.name } %>
+<% end %>

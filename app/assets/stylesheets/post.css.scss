@@ -1,0 +1,53 @@
+// Place all the styles related to the post controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+label {
+  display: block;
+}
+#post_form {
+  width: 780px;
+  padding: 10px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  border: 1px solid #EFEFEF;
+}
+.post_form_label {
+  margin: 0 0 10px 0;
+  font-size: 2em;
+}
+.post_form_contents {
+  margin: 0 0 20px 0;
+}
+#title_textfield {
+  width: 600px;
+  height: 40px;
+}
+#body_textarea {
+  width: 600px;
+  height: 90px;
+}
+
+#all_post {
+  width: 800px;
+  margin: 0 auto 0 auto;
+}
+.post {
+  border: 1px solid #EFEFEF;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+.post h2 {
+  height: 50px;
+  line-height: 50px;
+  virtical-align: middle;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #EFEFEF;
+  font-weight: normal;
+}
+.post p {
+  margin: 0;
+  padding: 10px;
+  height: 100px;
+}
