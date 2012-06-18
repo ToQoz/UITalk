@@ -7,7 +7,12 @@ class PostController < ApplicationController
     @post = Post.find(params[:id])
   end
   def add
-    @post = Post.create_and_set_image(params, current_user)
+    @post = Post.create_and_set_image({
+      title: params[:title],
+      body: params[:body],
+      image: params[:image],
+      user: current_user
+    })
     redirect_to action: :index
   end
 end

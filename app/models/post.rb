@@ -8,23 +8,23 @@ class Post
   referenced_in :user
   validates_presence_of [ :title, :body ]
 
-  def self.create_and_set_image(params, current_user)
-    post = self.where(
-      title: params[:title], body: params[:body], image: params[:image],
-      user: current_user
-    ).create
-    if post
-      self.set(post.id.to_s, params[:image].read.force_encoding('utf-8'))
-      post
-    else
-      # TODO
-      nil
+  module ImageMethods
+    def image_path
+      "#{Rails.root}/public/uploaded/#{self.id.to_s}.png"
+    end
+
+    def set_image(image)
+      File.open("#{image_path}", 'w').print(image.read.force_encoding('utf-8'))
     end
   end
-  def self.set(name, image)
+
+  include ImageMethods
+
+  def self.create_and_set_image(params)
     # TODO Error Handling
-    path = "#{Rails.root}/public/uploaded/#{name}.png"
-    # set /public/uploaded/xxx.png
-    File.open("#{path}", 'w').print(image)
+    post = self.new params
+    post.save
+    post.set_image(params[:image])
+    post
   end
 end
