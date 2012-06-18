@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  attr_protected :provider, :uid
+  #attr_protected :provider, :uid
   field :provider, :type => String
   field :uid, :type => String
   field :name, :type => String
@@ -11,7 +11,8 @@ class User
   validates_presence_of :uid
 
   def self.find_by_name(name)
-    return self.first(conditions: { name: name })
+    return nil if name.size <= 0
+    self.first(conditions: { name: name })
   end
 
   def self.optimize_data_from_omniauth_for_fields(auth)

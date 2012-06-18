@@ -11,6 +11,7 @@ describe User do
       should validate_presence_of(:provider)
     end
   end
+
   context 'when given full feed' do
     before do
       @user = FactoryGirl.build(:twitter_toqoz)
@@ -19,9 +20,10 @@ describe User do
       @user.save.should_not == false
     end
   end
+
   context 'when given a omniauthdata' do
     before do
-      @omniauthdata = {
+      @omni_auth_data = {
         provider: 'string',
         uid: 'string',
         info: {
@@ -30,17 +32,36 @@ describe User do
         }
       }
     end
-    describe 'User#optimize_data_from_omniauth_for_fields' do
+
+    describe 'User.optimize_data_from_omniauth_for_fields' do
       before do
-        @userdata = User.optimize_data_from_omniauth_for_fields(@omniauthdata)
+        @userdata = User.optimize_data_from_omniauth_for_fields @omni_auth_data
       end
-      context 'when get data form optimize_data_from_omniauth_for_fields'
+
+      context 'when get data form User#optimize_data_from_omniauth_for_fields' do
         describe 'User#create!' do
-        it 'succeeds create' do
-          proc {
-            User.create! @userdata
-          }.should_not raise_error
+          it 'succeeds create' do
+            proc { User.create! @userdata }.should_not raise_error
+          end
         end
+      end
+    end
+  end
+
+  describe 'User.find_by_name' do
+    context 'when given a empty string for user\'s name ' do
+      it 'return nil' do
+        User.find_by_name('').should == nil
+      end
+    end
+    context 'when given a user\'s name that is exists' do
+      before do
+        @user = FactoryGirl.build(:twitter_toqoz)
+        @user.save
+      end
+
+      it 'return this user' do
+        User.find_by_name(@user.name).should == @user
       end
     end
   end
