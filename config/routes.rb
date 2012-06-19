@@ -1,23 +1,20 @@
 UITalk::Application.routes.draw do
+
   root :to => 'home#index'
 
-  # User
-  match '/users', :to  => 'users#index', :via => :get
-  match '/users/:name', :to  => 'users#show', :via => :get
-  # Post
-  match '/post', :to  => 'post#index', :via => :get
-  match '/post/:id', :to  => 'post#show', :via => :get
-  match '/post', :to  => 'post#add', :via => :post
-  # Auth
+  # OmniAuth Callback
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
-  # Session
+  # Sessions
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
+  # Accounts
+  get 'accounts/login'
+  get 'accounts/signin'
 
-  resources :users, :only => [ :index, :show, :edit, :update ]
+  resources :post
+  resources :users
   resources :home, :only => [ :index ]
-  resources :post, :only => [ :index, :show, :edit, :update ]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -10,10 +10,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    if params[:name]
-      @user = User.find_by_name(params[:name])
-    else
-    end
+    @user = User.find_by_name(params[:id])
+    # TODO Not Found User
+    redirect_to action: :index if @user == nil
   end
 
   def edit

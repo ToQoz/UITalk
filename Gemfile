@@ -8,9 +8,10 @@ end
 gem 'jquery-rails'
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
+gem 'mongoid_slug'
 gem "omniauth-twitter"
 
-group :development, :test do
+group :test do
   gem 'factory_girl_rails', ">= 1.6.0"
   gem 'database_cleaner', ">= 0.7.1"
   gem 'rspec-rails', ">= 2.8.1"
