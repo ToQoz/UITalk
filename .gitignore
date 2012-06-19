@@ -20,4 +20,6 @@
 *.iml
 .idea
 
+/.rvmrc
+
 !.gitkeep
