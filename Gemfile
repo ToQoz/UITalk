@@ -11,6 +11,10 @@ gem "bson_ext", "~> 1.5"
 gem 'mongoid_slug'
 gem "omniauth-twitter"
 
+group :test, :development do
+  gem 'pry-rails'
+end
+
 group :test do
   gem 'factory_girl_rails', ">= 1.6.0"
   gem 'database_cleaner', ">= 0.7.1"
