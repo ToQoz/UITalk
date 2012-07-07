@@ -1,21 +1,21 @@
+# TODO sessionからoauthデータとりだすoauth_providerとかoauth_uidみたいなメソッド作る
 class SessionsController < ApplicationController
-
   def new
     redirect_to '/auth/twitter'
   end
 
   def create
+    _session = Session.new session
     auth = request.env["omniauth.auth"]
-    # TODO tokenとかのチェックも
-    user = User.where(provider: auth[:provider], uid: auth[:uid]).first
-    # TODO あとで見直す
+    user = User.find_by_oauth_data auth
     if user != nil
-      session[:user_id] = user.id
-      destroy_provider_session
+      # TODO モデルに???
+      _session.set_user_id user.id
+      _session.destroy_provider
       redirect_to controller: :accounts, action: :login
     else
-      store_provider_session auth
-      redirect_to controller: :accounts, action: :sigin
+      _session.store_provider auth
+      redirect_to controller: :accounts, action: :signin
     end
   end
 
@@ -29,14 +29,4 @@ class SessionsController < ApplicationController
   end
 
   private
-  def store_provider_session(auth)
-    session[:provider] = auth[:provider]
-    session[:uid] = auth[:uid]
-  end
-
-  def destroy_provider_session
-    session[:provider] = nil
-    session[:uid] = nil
-  end
-
 end

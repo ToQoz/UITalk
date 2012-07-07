@@ -1,2 +1,15 @@
 <h1>Accounts#signin</h1>
+
+<% if @oauth_session %>
+  <div>仮で表示</div>
+  <div>provider <%= @oauth_session[:provider] %><div>
+  <div>uid <%= @oauth_session[:uid] %><div>
+<% end %>
+
+<%= form_for(@user) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :email %>
+  <%= f.submit %>
+<% end %>
+
 <p>Find me in app/views/accounts/signin.html.erb</p>

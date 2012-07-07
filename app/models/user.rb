@@ -18,18 +18,24 @@ class User
   #   name
   # end
 
-  def self.find_by_name(name)
-    User.where(:name => name).first
-  end
-
-  def self.optimize_data_from_omniauth_for_fields(auth)
-    user = {}
-    user[:provider] = auth[:provider]
-    user[:uid] = auth[:uid]
-    if auth[:info]
-      user[:name] = auth[:info][:name] || ""
-      user[:email] = auth[:info][:email] || ""
+  class << self
+    def find_by_name(name)
+      self.where(:name => name).first
     end
-    user
+
+    def find_by_oauth_data(auth)
+      self.where(provider: auth[:provider], uid: auth[:uid]).first
+    end
+
+    def optimize_data_from_omniauth_for_fields(auth)
+      user = {}
+      user[:provider] = auth[:provider]
+      user[:uid] = auth[:uid]
+      if auth[:info]
+        user[:name] = auth[:info][:name] || ""
+        user[:email] = auth[:info][:email] || ""
+      end
+      user
+    end
   end
 end
