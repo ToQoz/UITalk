@@ -4,63 +4,50 @@ require 'spec_helper'
 
 describe User do
   describe 'Validations' do
-    it 'require uid' do
+    it 'uidを必須とする.' do
       should validate_presence_of(:uid)
     end
-    it 'require provider' do
+    it 'providerを必須とする.' do
       should validate_presence_of(:provider)
     end
   end
 
-  context 'when given full feed' do
-    before do
-      @user = FactoryGirl.build(:twitter_toqoz)
-    end
-    it 'succeeds save' do
-      @user.save.should_not == false
+  describe '#save' do
+    context 'すべてのフィールドが与えられた場合' do
+      before do
+        @user = FactoryGirl.build(:twitter_toqoz)
+      end
+      it '保存できる.' do
+        @user.save.should_not == false
+      end
     end
   end
 
-  context 'when given a omniauthdata' do
-    before do
-      @omni_auth_data = {
+  describe '.optimize_data_from_omniauth_for_fields' do
+    it '必要なデータを返す.' do
+      omni_auth_data = {
         provider: 'string',
         uid: 'string',
-        info: {
-          name: 'string',
-          email: 'string'
-        }
+        info: { name: 'string', email: 'string' }
       }
-    end
-
-    describe 'User.optimize_data_from_omniauth_for_fields' do
-      before do
-        @userdata = User.optimize_data_from_omniauth_for_fields @omni_auth_data
-      end
-
-      context 'when get data form User#optimize_data_from_omniauth_for_fields' do
-        describe 'User#create!' do
-          it 'succeeds create' do
-            proc { User.create! @userdata }.should_not raise_error
-          end
-        end
-      end
+      user = User.optimize_data_from_omniauth_for_fields omni_auth_data
+      user.should have_key(:provider)
+      user.should have_key(:uid)
     end
   end
 
-  describe 'User.find_by_name' do
-    context 'when given a empty string for user\'s name ' do
-      it 'return nil' do
+  describe '.find_by_name' do
+    before :each do
+      @user = FactoryGirl.build(:twitter_toqoz)
+      @user.save
+    end
+    context '空文字列を与えられた場合' do
+      it 'nilを返す.' do
         User.find_by_name('').should == nil
       end
     end
-    context 'when given a user\'s name that is exists' do
-      before do
-        @user = FactoryGirl.build(:twitter_toqoz)
-        @user.save
-      end
-
-      it 'return this user' do
+    context '存在しているユーザー名を与えられた場合' do
+      it 'そのユーザーのインスタンスを返す.' do
         User.find_by_name(@user.name).should == @user
       end
     end
