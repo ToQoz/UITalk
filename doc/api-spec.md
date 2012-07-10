@@ -80,8 +80,8 @@
       { name:"honbin", img:"http:///hogehoge/hoge.jpg" }
     ],
     tag: { //タグ情報
-      name:"twitter",                             //サービス名
-      img:"http:///hogehoge/hoge.jpg"             //サービス画像
+      name:"twitter",                             // サービス名
+      img:"http:///hogehoge/hoge.jpg"             // サービス画像
     },
     eval: { //評価情報
       good:3,                                     //いいね
@@ -90,8 +90,8 @@
     created: 1336801581163,                       // 投稿登録日時
     updated: 1336801581163                        // 投稿更新日時
   },
-  created: 1336801581163,                   // ストック登録日時
-  updated: 1336801581163                    // ストック更新日時
+  created: 1336801581163,                         // ストック登録日時
+  updated: 1336801581163                          // ストック更新日時
 }
 ```
 
@@ -100,18 +100,18 @@
 
 ```javascript
 {
-  id:"",                                         //コメントID
-  body:"たしかにー",                              //内容
+  id:"",                                         // コメントID
+  body:"たしかにー",                             // 内容
   eval: { //評価情報
-    good:2,                                      //いいね
-    bad:2                                        //よくないね
+    good:2,                                      // いいね
+    bad:2                                        // よくないね
   },
   user: { //ユーザ情報
-    name:"honbin",                               //ユーザ名
-    img:"http://hogehoge/hoge.jpg",              //ユーザ画像
+    name:"honbin",                               // ユーザ名
+    img:"http://hogehoge/hoge.jpg",              // ユーザ画像
   },
-  created,                                       //登録日時
-  updated                                        //更新日時
+  created,                                       // 登録日時
+  updated                                        // 更新日時
 }
 ```
 
@@ -120,20 +120,20 @@
 
 ```javascript
 {
-  name:"ToQoz",                                   //名前
-  img:"http://hogehoge.com/hoge.jpg",             //ユーザ画像
-  url:"http://toqoz.net",                         //ユーザURL
-  email:"toqoz403@gmail.com",                     //メールアドレス
-  location:"Yokohama",                            //住んでる場所
-  created:1336801581163,                          //登録日時
-  following_count:33,                             //フォローしている数           
-  follwer_count:12,                               //フォロワー数
-  stock_count:12,                                 //ストック数
-  stocked_count:12,                               //ストックされた数
-  good_count:100,                                 //goodと評価された数
-  bad_count:2,                                    //badと評価された数
-  post_count:100,                                 //投稿数
-  following_tag_count:34                          //フォローしているタグの数
+  name:"ToQoz",                                   // 名前
+  img:"http://hogehoge.com/hoge.jpg",             // ユーザ画像
+  url:"http://toqoz.net",                         // ユーザURL
+  email:"toqoz403@gmail.com",                     // メールアドレス
+  location:"Yokohama",                            // 住んでる場所
+  created:1336801581163,                          // 登録日時
+  following_count:33,                             // フォローしている数           
+  follwer_count:12,                               // フォロワー数
+  stock_count:12,                                 // ストック数
+  stocked_count:12,                               // ストックされた数
+  good_count:100,                                 // goodと評価された数
+  bad_count:2,                                    // badと評価された数
+  post_count:100,                                 // 投稿数
+  following_tag_count:34                          // フォローしているタグの数
 }
 ```
 
@@ -161,9 +161,9 @@
 
 ```javascript
 {
-  name:"ToQoz",                                  //お知らせへのアクションを行った人
-  act_div_name:"follow",                         //アクション区分名(follow or stock or good..)
-  act_url:"http://hogehoge.com",                 //対象アクションへのURL
-  created:1336801581163,                         //登録日時
+  name:"ToQoz",                                  // お知らせへのアクションを行った人
+  act_div_name:"follow",                         // アクション区分名(follow or stock or good..)
+  act_url:"http://hogehoge.com",                 // 対象アクションへのURL
+  created:1336801581163,                         // 登録日時
 }
 ```
