@@ -12,7 +12,7 @@ describe AccountsController do
   describe "GET 'login'" do
     it "returns http success" do
       get 'login'
-      response.should be_success
+      response.should redirect_to(root_url)
     end
   end
 
