@@ -1,11 +1,10 @@
 class AccountsController < ApplicationController
   def signin
-    _session = Session.new session
-    @oauth_session = {
-      provider: _session.oauth_provider,
-      uid: _session.oauth_uid
+    @oauth = {
+      provider: session[:oauth_provider],
+      uid: session[:oauth_uid]
     }
-    @user = User.new(name: _session.oauth_nickname)
+    @user = User.new(name: session[:oauth_nickname])
   end
 
   def login

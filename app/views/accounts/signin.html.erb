@@ -1,10 +1,8 @@
 <h1>Accounts#signin</h1>
 
-<% if @oauth_session %>
-  <div>仮で表示</div>
-  <div>provider <%= @oauth_session[:provider] %><div>
-  <div>uid <%= @oauth_session[:uid] %><div>
-<% end %>
+<div>仮で表示</div>
+<div>provider <%= @oauth[:provider] %><div>
+<div>uid <%= @oauth[:uid] %><div>
 
 <%= form_for(@user) do |f| %>
   <%= f.text_field :name %>

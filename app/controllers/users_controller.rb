@@ -16,14 +16,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    _session = Session.new session
     user_data = params[:user]
-    user_data[:uid] = _session.oauth_uid
-    user_data[:provider] = _session.oauth_provider
+    user_data[:uid] = session[:oauth_uid]
+    user_data[:provider] = session[:oauth_provider]
 
     @user = User.new user_data
     @user.save
-    _session.set_user_id @user.id
+    session[:user_id] = @user.id
     # TODO リダイレクトではなく, 画面とどまる, ユーザー情報表示
     redirect_to root_url, :notice => 'Posted!'
   end

@@ -5,18 +5,31 @@ class SessionsController < ApplicationController
   end
 
   def create
-    _session = Session.new session
     auth = request.env["omniauth.auth"]
     user = User.find_by_oauth_data auth
     if user != nil
       # TODO モデルに???
-      _session.set_user_id user.id
-      _session.destroy_provider
+      session[:user_id] = user.id
+      destroy_provider
       redirect_to controller: :accounts, action: :login
     else
-      _session.store_provider auth
+      store_provider auth
       redirect_to controller: :accounts, action: :signin
     end
+  end
+
+  def store_provider(auth)
+    session[:oauth_provider] = auth[:provider]
+    session[:oauth_uid] = auth[:uid]
+    session[:oauth_nickname] = auth[:info][:nickname]
+    session[:oauth_image] = auth[:info][:image]
+  end
+
+  def destroy_provider
+    session[:oauth_provider] = nil
+    session[:oauth_uid] = nil
+    session[:oauth_nickname] = nil
+    session[:oauth_image] = nil
   end
 
   def destroy
