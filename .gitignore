@@ -36,7 +36,6 @@ Thumbs.db
 
 # Project {{{
 /.rvmrc
-/config/database.yml
 /vendor/bundles/*
 /public/uploaded/*
 /config/initializers/secret_token.rb
