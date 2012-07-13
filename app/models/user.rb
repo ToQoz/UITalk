@@ -1,32 +1,18 @@
-class User
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Slug
+# -*- coding: utf-8 -*-
 
-  #attr_protected :provider, :uid
-  field :provider, :type => String
-  field :uid, :type => String
-  field :name, :type => String
-  field :email, :type => String
-  references_many :post
-  validates_presence_of :provider
-  validates_presence_of :uid
-  slug :name
+class User < ActiveRecord::Base
+  attr_accessible :id, :email, :name, :provider, :uid
 
-  # For ActiveRecord. When you use Mogoid, you should use mongoid-slug.
-  # def to_param
-  #   name
-  # end
+  validates_uniqueness_of :name, :case_sensitive => false
+
+  scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
+  scope :thirdparty_auth_data_is, lambda { |auth| where(provider: auth[:provider], uid: auth[:uid]) }
+
+  def to_param
+    name
+  end
 
   class << self
-    def find_by_name(name)
-      self.where(:name => name).first
-    end
-
-    def find_by_oauth_data(auth)
-      self.where(provider: auth[:provider], uid: auth[:uid]).first
-    end
-
     def optimize_data_from_omniauth_for_fields(auth)
       user = {}
       user[:provider] = auth[:provider]

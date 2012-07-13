@@ -1,5 +1,4 @@
 UITalk::Application.routes.draw do
-
   root :to => 'home#index'
 
   # OmniAuth Callback
@@ -9,11 +8,14 @@ UITalk::Application.routes.draw do
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
   # Accounts
-  get 'accounts/login'
-  get 'accounts/signin'
+  get 'accounts/signup'
 
-  resources :post
-  resources :users
+  resources :posts
+  resources :users do
+    member do
+       get ':name', :action => 'show'
+    end
+  end
   resources :home, :only => [ :index ]
 
   # The priority is based upon order of creation:

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe AccountsController do
 
-  describe "GET 'signin'" do
+  describe "GET 'siginup'" do
     it "returns http success" do
-      get 'signin'
+      get 'siginup'
       response.should be_success
     end
   end
@@ -12,7 +12,7 @@ describe AccountsController do
   describe "GET 'login'" do
     it "returns http success" do
       get 'login'
-      response.should redirect_to(root_url)
+      response.should be_success
     end
   end
 

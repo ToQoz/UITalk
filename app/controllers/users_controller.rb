@@ -1,17 +1,18 @@
-class UsersController < ApplicationController
+# -*- coding: utf-8 -*-
 
+class UsersController < ApplicationController
+  # TODO ApplicationControllerに実装
   # allow from login user
   before_filter :authenticate_user!, only: [:update, :edit]
   # allow from login user match owner of this page
   before_filter :correct_user?, only: [:update, :edit]
 
   def index
-    @users = User.all(conditions: {}, limit: 5)
+    @users = User.limit 5
   end
 
   def show
-    @user = User.find_by_slug(params[:id])
-    # TODO Not Found User
+    @user = User.name_is(params[:id]).first
     redirect_to action: :index if @user == nil
   end
 

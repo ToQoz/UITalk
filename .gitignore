@@ -14,12 +14,33 @@
 /log/*.log
 /tmp
 
-/vendor/bundles/*
-/public/uploaded/*
-# idea
+# Idea IDE {{{
 *.iml
 .idea
+# }}}
 
+# Backup File {{{
+*~
+.*~
+#*#
+*.sw[po]
+# }}}
+
+# Mac {{{
+.DS_Store
+# }}}
+
+# Widnows {{{
+Thumbs.db
+# }}}
+
+# Project {{{
 /.rvmrc
+/config/database.yml
+/vendor/bundles/*
+/public/uploaded/*
+/config/initializers/secret_token.rb
+/config/initializers/omniauth.rb
 
 !.gitkeep
+# }}}
