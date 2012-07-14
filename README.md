@@ -1,6 +1,6 @@
 # 実行
 
-```
+```sh
 $ cp config/initializers/omniauth.rb.sample config/initializers/omniauth.rb
 # 自分の環境に合わせて Change it! 部分を変える.
 $ vi config/initializers/omniauth.rb
