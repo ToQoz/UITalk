@@ -18,6 +18,8 @@ $ DB=sqlite bundle exec rails s
 ```
 
 # Masterへのコミット禁止
+
+```sh
 $ vi .git/hooks/pre-commit
 ----------------------------
 
