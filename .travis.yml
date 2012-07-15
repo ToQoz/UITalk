@@ -13,9 +13,9 @@ before_script:
 
 notifications:
   email:
-  recipients:
-    - toqoz403@gmail.com
-    - bin.honda@gmail.com
-    - kenjikaneko0909@yahoo.co.jp
-  on_success: change
-  on_failure: always
+    recipients:
+      - toqoz403@gmail.com
+      - bin.honda@gmail.com
+      - kenjikaneko0909@yahoo.co.jp
+    on_success: change
+    on_failure: always
