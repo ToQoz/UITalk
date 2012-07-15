@@ -1,4 +1,5 @@
-# 実行
+# UITalk
+## 実行
 
 ```sh
 $ cp config/initializers/omniauth.rb.sample config/initializers/omniauth.rb
@@ -17,7 +18,8 @@ $ DB=sqlite bundle exec rake db:migrate
 $ DB=sqlite bundle exec rails s
 ```
 
-# Masterへのコミット禁止
+## Git便利hooks
+### Masterへのコミット禁止
 
 ```sh
 $ vi .git/hooks/pre-commit
@@ -53,3 +55,10 @@ exit 0
 ----------------------------
 $ chmod +x .git/hooks/pre-commit
 ```
+
+## Git Branching
+remote branchはmaster/develop.  
+masterへのmergeはtravis-ci通った後.  
+
+developからtopic branchを切り, --no-ffオプション付きでdevelopへmerge.  
+Pull Requestはdevelop -> develop.
