@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class User < ActiveRecord::Base
-  attr_accessible :id, :email, :name, :provider, :uid
+  attr_accessible :id, :name, :email, :image, :provider, :uid
 
   validates_uniqueness_of :name, :case_sensitive => false
 

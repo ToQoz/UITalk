@@ -6,13 +6,13 @@
 <% end %>
 
 <div id="all_post">
-<% @posts.each do |p| %>
+  <% @posts.each do |p| %>
   <div class='post'>
     <h2><%= link_to p.title, { controller: :posts, action: :show, id: p.id } %></h2>
     <p><%= p.body %></p>
     <!--<p><%=
     #image_tag image_url_by_id(p.id), width: 50, height: 50
     %></p>-->
-</div>
-<% end %>
+  </div>
+  <% end %>
 </div>
