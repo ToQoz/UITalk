@@ -4,7 +4,17 @@ rvm:
 env:
   - DB=sqlite
   - DB=mysql
+
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate test
 before_script:
   - mysql -e 'create database myapp_test'
+
+notifications:
+  email:
+  recipients:
+    - toqoz403@gmail.com
+    - bin.honda@gmail.com
+    - kenjikaneko0909@yahoo.co.jp
+  on_success: change
+  on_failure: always
