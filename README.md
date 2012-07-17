@@ -56,9 +56,20 @@ exit 0
 $ chmod +x .git/hooks/pre-commit
 ```
 
-## Git Branching
-remote branchはmaster/develop.  
-masterへのmergeはtravis-ci通った後.  
+## Contributes by Pull Request
+$ git remote add upstream git://github.com/ToQoz/UITalk.git
+$ git checkout -b develop upstream/develop
+$ git checkout -b your-topic-branch
 
-developからtopic branchを切り, --no-ffオプション付きでdevelopへmerge.  
-Pull Requestはdevelop -> develop.
+# if there is changes in upstream during your coding in local. {{{
+$ git stash
+$ git checkout develop
+$ git pull upstream develop
+$ git checkout your-topic-branch
+$ git rebase develop
+$ git stash apply <stash>
+$ git stash drop <stash>
+# }}}
+
+$ git commit -am "YOUR COMMIT MESSAGES"
+$ git push origin your-topic-branch
