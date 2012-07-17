@@ -58,7 +58,7 @@ $ chmod +x .git/hooks/pre-commit
 
 ## Contributes by Pull Request
 
-```
+```sh
 $ git remote add upstream git://github.com/ToQoz/UITalk.git
 $ git checkout -b develop upstream/develop
 $ git checkout -b your-topic-branch
