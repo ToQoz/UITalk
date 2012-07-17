@@ -57,6 +57,8 @@ $ chmod +x .git/hooks/pre-commit
 ```
 
 ## Contributes by Pull Request
+
+```
 $ git remote add upstream git://github.com/ToQoz/UITalk.git
 $ git checkout -b develop upstream/develop
 $ git checkout -b your-topic-branch
@@ -73,3 +75,4 @@ $ git stash drop <stash>
 
 $ git commit -am "YOUR COMMIT MESSAGES"
 $ git push origin your-topic-branch
+```
