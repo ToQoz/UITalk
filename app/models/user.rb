@@ -13,6 +13,25 @@ class User < ActiveRecord::Base
   end
 
   class << self
+    # Public: Optimize 3'd party OAuth data that returned by omniauth for User model.
+    #
+    # auth - A Hash with the 3'rd party OAuth data that returned by omniauth.
+    #        :provider  - A String identifying 3'rd party OAuth provider.
+    #        :uid  - A String identifying 3'rd party OAuth uid.
+    #
+    # Examples
+    #
+    #   optimize_data_from_omniauth_for_fields({
+    #     provider: "facebook",
+    #     uid: "1111",
+    #     info: {
+    #       name: "toqoz",
+    #       email: "toqoz403@gmail.com"
+    #     }
+    #   })
+    #   # => { provider: "facebook", uid: "1111", name: "toqoz", email: "toqoz403@gmail.com" }
+    #
+    # Returns a Hash of optimized for User model.
     def optimize_data_from_omniauth_for_fields(auth)
       user = {}
       user[:provider] = auth[:provider]
