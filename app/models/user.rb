@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 class User < ActiveRecord::Base
+  has_many :posts
+
   attr_accessible :id, :name, :email, :image, :provider, :uid
 
   validates_uniqueness_of :name, :case_sensitive => false
