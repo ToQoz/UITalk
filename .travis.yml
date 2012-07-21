@@ -7,8 +7,7 @@ env:
 
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate test
-  - RAILS_ENV=test bundle exec rake spec:models --trace
-  - RAILS_ENV=test bundle exec rspec spec/deploy/*_spec.rb --backtrace
+  - RAILS_ENV=test bundle exec rake --trace spec:models
 before_script:
   - mysql -e 'create database myapp_test'
 
