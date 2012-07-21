@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 module ApplicationHelper
   def errors_for(object, message=nil)
     html = ""
