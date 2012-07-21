@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   before_filter :correct_user?, only: [:update, :edit]
 
   def index
-    @users = User.limit 5
+    @user = User.new(name: session[:oauth_nickname])
   end
 
   def show
@@ -17,15 +17,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_data = params[:user]
-    user_data[:uid] = session[:oauth_uid]
-    user_data[:provider] = session[:oauth_provider]
-
-    @user = User.new user_data
-    @user.save
-    session[:user_id] = @user.id
-    # TODO リダイレクトではなく, 画面とどまる, ユーザー情報表示
-    redirect_to root_url, :notice => 'Posted!'
+    @user = User.new params[:user]
+    @user[:uid] = session[:oauth_uid]
+    @user[:provider] = session[:oauth_provider]
+    if @user.save
+      session[:user_id] = @user.id
+    end
+    render(template: 'accounts/signup')
   end
 
   def edit

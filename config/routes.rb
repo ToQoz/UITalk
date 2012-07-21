@@ -9,6 +9,7 @@ UITalk::Application.routes.draw do
   match '/signin' => 'sessions#new', :as => :signin
   # Accounts
   get 'accounts/signup'
+  match 'accounts/signup', :via => :post, :to => 'users#create'
 
   resources :posts
   resources :users do
