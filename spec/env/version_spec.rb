@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe :CheckConfigFiles do
+describe :RubyVersionCheck do
   it {
     RUBY_VERSION.should >= '1.9.3'
   }
