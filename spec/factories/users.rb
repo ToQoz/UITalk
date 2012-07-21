@@ -1,10 +1,14 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :twitter_toqoz, class: User do |f|
+  factory :user do
+    sequence(:name) { |n| "registered-#{n}" }
+    sequence(:email) { |n| "registered-#{n}@example.com" }
+  end
+  factory :user_with_twitter, class: User do |f|
     f.provider "twitter"
-    f.uid "toqozuid"
-    f.name "toqoz"
-    f.email "toqoz@example.com"
+    sequence(:uid) { |n| "registered-#{n}" }
+    sequence(:name) { |n| "registered-#{n}" }
+    sequence(:email) { |n| "registered-#{n}@example.com" }
   end
 end

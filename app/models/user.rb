@@ -5,13 +5,20 @@ class User < ActiveRecord::Base
 
   attr_accessible :id, :name, :email, :image, :provider, :uid
 
-  validates_uniqueness_of :name, :case_sensitive => false
+  validate :third_party_oauth_valid?
+  validates :uid, :uniqueness => { :case_sensitive => false }
+  validates :name, :presence => { :mesage => 'は、必須です' } , :uniqueness => { :case_sensitive => false, :message => 'は、既に登録されています' }
+  validates :email, :presence => { :mesage => 'は、必須です' } , :uniqueness => { :case_sensitive => false, :message => 'は、既に登録されています' }
 
   scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
   scope :thirdparty_auth_data_is, lambda { |auth| where(provider: auth[:provider], uid: auth[:uid]) }
 
   def to_param
     name
+  end
+
+  def provider_list
+    [ 'twitter' ]
   end
 
   class << self
@@ -43,6 +50,26 @@ class User < ActiveRecord::Base
         user[:email] = auth[:info][:email] || ""
       end
       user
+    end
+  end
+private
+  def include_by_provider_list?
+    provider_list().include? provider
+  end
+
+  def third_party_oauth_valid?
+    provider_is_empty = (provider.nil? || provider.length < 0)
+    uid_is_empty = (uid.nil? || uid.length < 0)
+
+    if !provider_is_empty
+      if !include_by_provider_list?
+        errors.add(:provider, 'providerが不正')
+      elsif uid_is_empty
+        errors.add(:uid, 'uidが空です')
+      end
+    end
+    if !uid_is_empty
+      errors.add(:provider, 'providerが空です') if provider_is_empty
     end
   end
 end

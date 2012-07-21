@@ -4,6 +4,52 @@ require 'spec_helper'
 
 describe User do
   # TODO omniauthからの値のテストも必要あり
+  describe '.name' do
+    it 'は、重複する場合は保存しない' do
+      user1 = FactoryGirl.create(:user, { name: "toqoz" })
+      user2 = FactoryGirl.build(:user, { name: "toqoz" })
+      user2.should_not be_valid
+      user2.should have(1).error_on(:name)
+    end
+  end
+
+  describe '.email' do
+    it 'は、重複する場合は保存しない' do
+      user1 = FactoryGirl.create(:user, { email: "toqoz403@gmail.com" })
+      user2 = FactoryGirl.build(:user, { email: "toqoz403@gmail.com" })
+      user2.should_not be_valid
+      user2.should have(1).error_on(:email)
+    end
+  end
+
+  describe '.uid' do
+    it 'は、.providerが空でない時に, 空である場合は保存しない' do
+      user = FactoryGirl.build(:user, { provider: "twitter" })
+      user.should_not be_valid
+      user.should have(1).error_on(:uid)
+    end
+    it 'は、重複する場合は保存しない' do
+      uid = "11111"
+      user1 = FactoryGirl.create(:user, { provider: "twitter", uid: uid })
+      user2 = FactoryGirl.build(:user, { provider: "twitter", uid: uid })
+      user2.should_not be_valid
+      user2.should have(1).error_on(:uid)
+    end
+  end
+
+  describe '.provider' do
+    it 'は、.uidが空でない時に, 空である場合は保存しない' do
+      user = FactoryGirl.build(:user, { uid: "111111" })
+      user.should_not be_valid
+      user.should have(1).error_on(:provider)
+    end
+    it 'は、不正な[User.provider_listに含まれない]値の場合は保存しない' do
+      user = FactoryGirl.build(:user, { provider: "hogetter", uid: "111111" })
+      user.should_not be_valid
+      user.should have(1).error_on(:provider)
+    end
+  end
+
   describe '.optimize_data_from_omniauth_for_fields' do
     context 'は、omniauthからのデータを渡した時、' do
       it '必要なデータを返す。' do
@@ -19,20 +65,41 @@ describe User do
     end
   end
 
+  describe '#thirdparty_auth_data_id scope' do
+    before :each do
+      @user = FactoryGirl.create(:user_with_twitter)
+    end
+    context '存在するuidとproviderを与えられた場合、' do
+      subject { User.thirdparty_auth_data_is(provider: @user.provider, uid: @user.uid) }
+      it 'そのユーザーのインスタンスを1件のみ含む。' do
+        should include(@user)
+        should have(1).items
+      end
+    end
+  end
+
   describe '#name_is scope' do
     before :each do
-      @user = FactoryGirl.build(:twitter_toqoz)
+      @user = FactoryGirl.build(:user_with_twitter)
       @user.save
     end
     context 'は、空文字列を与えられた場合、' do
+      subject { User.name_is('') }
       it 'なにも含まない。' do
-        User.name_is('').should == []
+        should have(0).items
       end
     end
     context 'は、存在しているユーザー名が与えられた場合、' do
+      subject { User.name_is(@user.name) }
       it 'そのユーザーのインスタンスを1件のみ含む。' do
-        User.name_is(@user.name).should == [ @user ]
+        should include(@user)
+        should have(1).items
       end
     end
+  end
+
+  describe '#provider_list' do
+    subject { User.new.provider_list }
+    it { should eq([ 'twitter' ]) }
   end
 end
