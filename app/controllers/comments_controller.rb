@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+<<<<<<< HEAD
   respond_to :html, :json
 
   # allow from login user
@@ -15,7 +16,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-
     @post = Post.find(params[:post_id])
 
     @comment = Comment.new({
