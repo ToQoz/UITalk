@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
       user_id: current_user.id,
       post_id: params[:post_id],
     })
+
     if @comment.save
       redirect_to @post
     else
