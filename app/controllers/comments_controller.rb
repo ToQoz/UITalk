@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+<<<<<<< HEAD
   respond_to :html, :json
 
   # allow from login user
@@ -23,6 +24,7 @@ class CommentsController < ApplicationController
       user_id: current_user.id,
       post_id: params[:post_id],
     })
+
     if @comment.save
       redirect_to @post
     else
