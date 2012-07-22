@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
 class Post < ActiveRecord::Base
+
+  has_many :comments
+
+  accepts_nested_attributes_for :comments
+
   attr_accessible :user_id, :title, :body
 
   scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
