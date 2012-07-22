@@ -1,4 +1,5 @@
 UITalk::Application.routes.draw do
+
   root :to => 'home#index'
 
   # OmniAuth Callback
@@ -10,7 +11,9 @@ UITalk::Application.routes.draw do
   # Accounts
   get 'accounts/signup'
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   resources :users do
     member do
        get ':name', :action => 'show'
