@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
 
+# t.string   "provider"
+# t.string   "uid"
+# t.string   "name"
+# t.string   "email"
+# t.datetime "created_at",                   :null => false
+# t.datetime "updated_at",                   :null => false
+# t.string   "image",      :default => ""
+# t.boolean  "available",  :default => true
+
 class User < ActiveRecord::Base
   has_many :posts
 
