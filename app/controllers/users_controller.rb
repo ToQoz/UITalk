@@ -1,23 +1,27 @@
 # -*- coding: utf-8 -*-
 
 class UsersController < ApplicationController
-  # TODO ApplicationControllerに実装
+  respond_to :html, :json
+
   # allow from login user
-  before_filter :authenticate_user!, only: [:update, :edit]
+  before_filter :authenticate_user!, only: [ :update, :edit ]
   # allow from login user match owner of this page
-  before_filter :correct_user?, only: [:update, :edit]
+  before_filter :correct_user?, only: [ :update, :edit ]
 
   def index
-    @user = User.new(name: session[:oauth_nickname])
+    @users = User.limit 5
+    respond_with @users
   end
 
   def show
     @user = User.name_is(params[:id]).first
-    redirect_to action: :index if @user == nil
+    respond_with @user
   end
 
+  # TODO new/create用にnot_authenticate_user!みたいなの必要ありそう.
   def new
     @user = User.new(name: session[:oauth_nickname])
+    respond_with @user
   end
 
   def create
@@ -27,7 +31,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
     end
-    render :new
+    respond_with @user
   end
 
   def edit
