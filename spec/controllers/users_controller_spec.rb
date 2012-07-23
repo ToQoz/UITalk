@@ -4,11 +4,11 @@ require 'spec_helper'
 
 describe UsersController do
   describe :Routing do
-    describe "GET 'index'" do
+    describe "GET /users" do
       subject { { :get => "/users" } }
       it { should route_to(controller: "users", action: "index") }
     end
-    describe "GET /usres/:id" do
+    describe "GET /users/:id" do
       subject { { :get => "/users/ToQoz" } }
       it { should route_to(controller: "users", action: "show", id: "ToQoz") }
     end
