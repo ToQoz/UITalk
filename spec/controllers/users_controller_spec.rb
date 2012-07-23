@@ -37,4 +37,20 @@ describe UsersController do
       assigns(:user).should eq(user)
     end
   end
+  describe 'UsersController#create' do
+    before :each do
+      @user = FactoryGirl.create :user
+    end
+    it 'Userモデルはsaveメソッドを呼び出しのメッセージを受け取る。' do
+      @user.should_receive :save
+      User.stub new: @user
+      post :create
+    end
+    it '作成されたユーザのページにリダイレクトされる。' do
+      @user.should_receive :save
+      User.stub new: @user
+      post :create
+      response.should redirect_to(@user)
+    end
+  end
 end
