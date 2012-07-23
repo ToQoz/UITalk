@@ -1,0 +1,12 @@
+<h1>Accounts#signin</h1>
+
+<div>仮で表示</div>
+<div>provider <%= session[:oauth_provider] %><div>
+<div>uid <%= session[:oauth_uid] %><div>
+
+<%= form_for(@user, { url: '/accounts/signup', method: :post }) do |f| %>
+  <%= errors_for(@user, "Opps, unable to signup").html_safe %>
+  <%= f.text_field :name %>
+  <%= f.text_field :email %>
+  <%= f.submit %>
+<% end %>

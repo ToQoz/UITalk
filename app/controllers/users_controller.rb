@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     redirect_to action: :index if @user == nil
   end
 
+  def new
+    @user = User.new(name: session[:oauth_nickname])
+  end
+
   def create
     @user = User.new params[:user]
     @user[:uid] = session[:oauth_uid]
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
     end
-    render(template: 'accounts/signup')
+    render :new
   end
 
   def edit

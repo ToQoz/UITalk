@@ -8,7 +8,7 @@ UITalk::Application.routes.draw do
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
   # Accounts
-  get 'accounts/signup'
+  match 'accounts/signup', :via => :get, :to => 'users#new'
   match 'accounts/signup', :via => :post, :to => 'users#create'
 
   resources :posts

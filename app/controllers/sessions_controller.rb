@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if authManager.authenticate
       redirect_to root_url, notice: 'Signed in!'
     else
-      redirect_to controller: :accounts, action: :signup
+      redirect_to controller: :users, action: :new
     end
   end
 
