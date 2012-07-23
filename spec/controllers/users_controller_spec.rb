@@ -23,4 +23,18 @@ describe UsersController do
       it { should route_to(controller: "users", action: "new") }
     end
   end
+  describe 'UsersController#index' do
+    it '作成済みのuserが@usersにアサインされている。' do
+      user = FactoryGirl.create(:user)
+      get :index
+      assigns(:users).should eq([ user ])
+    end
+  end
+  describe 'UsersController#show' do
+    it 'nameで指定されたユーザのインスタンスが@userにアサインされている。' do
+      user = FactoryGirl.create(:user)
+      get :show, { id: user.name }
+      assigns(:user).should eq(user)
+    end
+  end
 end

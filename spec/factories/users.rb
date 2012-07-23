@@ -1,6 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+  factory :empty_user do
+  end
   factory :user do
     sequence(:name) { |n| "registered-#{n}" }
     sequence(:email) { |n| "registered-#{n}@example.com" }
