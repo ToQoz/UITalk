@@ -1,40 +1,26 @@
+# -*- coding: utf-8 -*-
+
 require 'spec_helper'
 
 describe UsersController do
+  describe :Routing do
+    describe "GET 'index'" do
+      subject { { :get => "/users" } }
+      it { should route_to(controller: "users", action: "index") }
+    end
+    describe "GET /usres/:id" do
+      subject { { :get => "/users/ToQoz" } }
+      it { should route_to(controller: "users", action: "show", id: "ToQoz") }
+    end
 
-  describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
-      response.should be_success
+    describe "POST /accounts/signup" do
+      subject { { :post => "/accounts/signup" } }
+      it { should route_to(controller: "users", action: "create") }
+    end
+
+    describe "GET /accounts/signup" do
+      subject { { :get => "/accounts/signup" } }
+      it { should route_to(controller: "users", action: "new") }
     end
   end
-
-  describe "GET 'show'" do
-    it "returns http success" do
-      get 'show'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'create'" do
-    it "returns http success" do
-      get 'create'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'edit'" do
-    it "returns http success" do
-      get 'edit'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'update'" do
-    it "returns http success" do
-      get 'update'
-      response.should be_success
-    end
-  end
-
 end
