@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 UITalk::Application.routes.draw do
   root :to => 'home#index'
 
