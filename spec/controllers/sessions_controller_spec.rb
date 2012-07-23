@@ -1,33 +1,24 @@
+# -*- coding: utf-8 -*-
+
 require 'spec_helper'
 
 describe SessionsController do
-
-  describe "GET 'new'" do
-    it "returns http success" do
-      get 'new'
-      response.should be_success
+  describe :Routing do
+    describe "GET /signin" do
+      subject { { :get => "/signin" } }
+      it { should route_to(controller: "sessions", action: "new") }
+    end
+    describe "GET /signout" do
+      subject { { :get => "/signout" } }
+      it { should route_to(controller: "sessions", action: "destroy") }
+    end
+    describe "GET /auth/:provider/callback" do
+      subject { { :get => "/auth/twitter/callback" } }
+      it { should route_to(controller: "sessions", action: "create", provider: "twitter") }
+    end
+    describe "GET /auth/failure" do
+      subject { { :get => "/auth/failure" } }
+      it { should route_to(controller: "sessions", action: "failure") }
     end
   end
-
-  describe "GET 'create'" do
-    it "returns http success" do
-      get 'create'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'destroy'" do
-    it "returns http success" do
-      get 'destroy'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'failure'" do
-    it "returns http success" do
-      get 'failure'
-      response.should be_success
-    end
-  end
-
 end
