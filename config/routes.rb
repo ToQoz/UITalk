@@ -12,11 +12,7 @@ UITalk::Application.routes.draw do
   match 'accounts/signup', :via => :post, :to => 'users#create'
 
   resources :posts
-  resources :users do
-    member do
-       get ':name', :action => 'show'
-    end
-  end
+  resources :users
   resources :home, :only => [ :index ]
 
   # The priority is based upon order of creation:
