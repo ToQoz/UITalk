@@ -6,6 +6,20 @@ require 'spork'
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
+
+  if ENV['COVERAGE'] == 'on'
+    unless ENV['DRB']
+      require 'simplecov'
+      require 'simplecov-rcov'
+      SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+      SimpleCov.start 'rails' do
+        add_group "Controllers", "app/controllers"
+        add_group "Models", "app/models"
+        add_filter "vendor/"
+      end
+    end
+  end
+
   require 'rspec/rails'
   require 'rspec/autorun'
 
@@ -46,5 +60,18 @@ end
 
 
 Spork.each_run do
-  require 'factory_girl_rails'
+  if ENV['COVERAGE'] == 'on'
+    if ENV['DRB']
+      require 'simplecov'
+      require 'simplecov-rcov'
+      SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+      SimpleCov.start 'rails' do
+        add_group "Controllers", "app/controllers"
+        add_group "Models", "app/models"
+        add_filter "vendor/"
+      end
+    end
+  end
+  require 'factory_girl'
+  FactoryGirl.reload
 end

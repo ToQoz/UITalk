@@ -40,6 +40,7 @@ Thumbs.db
 /public/uploaded/*
 /config/initializers/secret_token.rb
 /config/initializers/omniauth.rb
+/coverage
 
 !.gitkeep
 # }}}

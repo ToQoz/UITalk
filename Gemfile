@@ -34,6 +34,9 @@ group :test do
   gem 'cucumber-rails', ">= 1.2.1", :require => false
   gem 'capybara', ">= 1.1.2"
   gem "factory_girl_rails", ">= 1.6.0", :require => false
+  # Code coverage for Ruby 1.9
+  gem 'simplecov', :require => false
+  gem 'simplecov-rcov', :require => false
 end
 
 # To use ActiveModel has_secure_password
