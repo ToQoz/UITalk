@@ -1,23 +1,24 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-
+def use_simplecov
+  require 'simplecov'
+  require 'simplecov-rcov'
+  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+  SimpleCov.start 'rails' do
+    add_group "Controllers", "app/controllers"
+    add_group "Models", "app/models"
+    add_filter "vendor/"
+  end
+end
+use_simplecov unless ENV['DRB']
 require 'rubygems'
 require 'spork'
 
+ENV["RAILS_ENV"] ||= 'test'
+
 Spork.prefork do
-  ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
 
-  if ENV['COVERAGE'] == 'on'
-    unless ENV['DRB']
-      require 'simplecov'
-      require 'simplecov-rcov'
-      SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-      SimpleCov.start 'rails' do
-        add_group "Controllers", "app/controllers"
-        add_group "Models", "app/models"
-        add_filter "vendor/"
-      end
-    end
+  unless ENV['DRB']
+    use_simplecov if ENV['COVERAGE'] == 'on'
   end
 
   require 'rspec/rails'
@@ -58,19 +59,9 @@ Spork.prefork do
   end
 end
 
-
 Spork.each_run do
-  if ENV['COVERAGE'] == 'on'
-    if ENV['DRB']
-      require 'simplecov'
-      require 'simplecov-rcov'
-      SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-      SimpleCov.start 'rails' do
-        add_group "Controllers", "app/controllers"
-        add_group "Models", "app/models"
-        add_filter "vendor/"
-      end
-    end
+  if ENV['DRB']
+    use_simplecov if ENV['COVERAGE'] == 'on'
   end
   require 'factory_girl'
   FactoryGirl.reload
