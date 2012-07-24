@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ruby $(cd "$(dirname $0)"/.. && pwd)/script/gspec.rb
