@@ -8,7 +8,9 @@ def use_simplecov
     add_filter "vendor/"
   end
 end
-use_simplecov unless ENV['DRB']
+if ENV['COVERAGE'] == 'on'
+  use_simplecov unless ENV['DRB']
+end
 require 'rubygems'
 require 'spork'
 
