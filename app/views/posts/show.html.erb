@@ -3,7 +3,7 @@
 <p><%= image_tag "/uploaded/#{@post.id.to_s}.png" %></p>
 
 <%= form_for [@post, @comment] do |c| %>
-  <%= errors_for(@comment, "Opps,  unable to signup").html_safe %>
+  <%= errors_for(@comment, "Opps, unable to comment create").html_safe %>
   <div id="body_text_area"><%= c.text_area :body %></div>
   <%= c.submit %>
 <% end %>
