@@ -7,3 +7,11 @@
   <%= c.submit %>
 <% end %>
 
+<div id="all_comment">
+<% @post.comments.each do |c| %>
+  <div class='commnet'>
+    <p><%= c.body %></p>
+  </div>
+</div>
+<% end %>
+
