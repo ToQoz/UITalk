@@ -58,3 +58,11 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:twitter] = {
+  uid: '1234',
+  provider: 'twitter',
+  info: {
+    nickname: 'toqoz',
+    name: 'toqoz',
+  },
+}
