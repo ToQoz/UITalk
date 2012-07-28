@@ -12,7 +12,7 @@ mysql: &mysql
   adapter: mysql2
   username: root
   password:
-  database: uitalk_<%= Rails.env %>
+  database: myapp_<%= Rails.env %>
 
 defaults: &defaults
   pool: 5
