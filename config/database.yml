@@ -23,21 +23,12 @@ defaults: &defaults
 development:
   <<: *defaults
 
-test:
+test: &test
   <<: *defaults
 
 production:
   <<: *defaults
   # TODO: Add erb-echo of credentials
 
-test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
-
-production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+cucumber:
+  <<: *test
