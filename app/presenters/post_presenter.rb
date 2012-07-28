@@ -1,0 +1,3 @@
+class PostPresenter < Presenter
+
+end
