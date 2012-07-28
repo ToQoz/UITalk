@@ -102,4 +102,9 @@ describe User do
     subject { User.new.provider_list }
     it { should eq([ 'twitter' ]) }
   end
+
+  describe '#include_by_provider_list' do
+    subject { FactoryGirl.build(:user_with_twitter) }
+    it { should be_true }
+  end
 end
