@@ -41,6 +41,7 @@ Thumbs.db
 /config/initializers/secret_token.rb
 /config/initializers/omniauth.rb
 /coverage
+/db/*.sqlite3-journal
 
 !.gitkeep
 # }}}

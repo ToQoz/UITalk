@@ -3,7 +3,7 @@
 class Post < ActiveRecord::Base
   attr_accessible :user_id, :title, :body
 
-  scope :recent, lambda { |n| order('created_at DESC').limit(n) }
+  scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
 
   module ImageMethods
     def image_path
