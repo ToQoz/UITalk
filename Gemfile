@@ -26,6 +26,8 @@ gem "omniauth-twitter"
 
 group :test, :development do
   gem 'pry-rails'
+  gem 'pry-coolline'
+  gem 'hirb'
   gem 'rspec-rails', ">= 2.8.1"
 end
 
