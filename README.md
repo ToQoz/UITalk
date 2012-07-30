@@ -27,7 +27,9 @@ $ DB=sqlite bundle exec rails s
 
 ```ruby
 # pryでSQLのログ流す
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+if defined? ActiveRecord
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
 
 # ActiveRecordなどのfindの結果をテーブルで見やすく表示
 begin
