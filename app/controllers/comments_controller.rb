@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+<<<<<<< Updated upstream
   respond_to :html, :json
 
   # allow from login user
@@ -15,7 +16,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-
     @post = Post.find(params[:post_id])
 
     @comment = Comment.new({
@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
       user_id: current_user.id,
       post_id: params[:post_id],
     })
+
     if @comment.save
       redirect_to @post
     else
