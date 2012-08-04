@@ -15,9 +15,9 @@ $ bundle install --path=vendor/bundles
 $ DB=sqlite bundle exec rake db:migrate
 
 # 環境とかのテスト
-$ DB=sqlite be rspec spec/env/*_spec.rb
+$ DB=sqlite bundle exec rspec spec/env/*_spec.rb
 # secret_tokeとかomniauthの設定ファイルがあるかどうかとかのテスト
-$ DB=sqlite be rspec spec/env/*_spec.rb
+$ DB=sqlite bundle exec rspec spec/env/*_spec.rb
 
 # DB名を環境変数に入れれば良いというだけ
 $ DB=sqlite bundle exec rails s
@@ -108,8 +108,9 @@ $ git checkout -b your-topic-branch
 # === 作業終了 ===
 
 # テスト通るか確認
-$ DB=sqlite be rspec spec/env/*_spec.rb
-$ DB=sqlite be rake spec models
+$ DB=sqlite bundle exec rake db:migrate test
+$ DB=sqlite bundle exec rake spec
+$ DB=sqlite bundle exec rspec spec/env/*_spec.rb
 
 $ git commit -am "YOUR COMMIT MESSAGES"
 # 作業中にリモートに変更あったら {{{
@@ -118,8 +119,8 @@ $ git pull upstream develop
 $ git checkout your-topic-branch
 $ git rebase develop
 # テスト通るか確認
-$ DB=sqlite be rspec spec/env/*_spec.rb
-$ DB=sqlite be rake spec models
+$ DB=sqlite bundle exec rspec spec/env/*_spec.rb
+$ DB=sqlite bundle exec rake spec models
 # }}}
 
 $ git push origin your-topic-branch
