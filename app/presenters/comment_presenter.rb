@@ -1,3 +1,2 @@
-class CommentPresenter < Draper::Base
-    decorates :comment
+class CommentPresenter
 end
