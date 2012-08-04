@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(:version => 20120804060938) do
   end
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",    :limit => 255
+    t.integer  "user_id"
     t.string   "title"
     t.string   "body"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.string   "domain",                    :default => ""
-    t.string   "image",                     :default => ""
-    t.boolean  "available",                 :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "domain",     :default => ""
+    t.string   "image",      :default => ""
+    t.boolean  "available",  :default => true
   end
 
   create_table "users", :force => true do |t|
