@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ ! $DB ] ; then export DB=sqlite; fi
+
+# migrate
+bundle exec rake db:migrate test
+
+# run spec
+bundle exec rake spec
+bundle exec rspec spec/env/*_spec.rb
