@@ -8,11 +8,13 @@
 # t.datetime "updated_at",                   :null => false
 # t.string   "image",      :default => ""
 # t.boolean  "available",  :default => true
+# t.string   "password_digest"
 
 class User < ActiveRecord::Base
   has_many :posts
 
-  attr_accessible :id, :name, :email, :image, :provider, :uid
+  has_secure_password
+  attr_accessible :id, :name, :email, :image, :provider, :uid, :password, :password_confirmation, :password_digest
 
   validate :third_party_oauth_valid?
   validates :uid, :uniqueness => { :case_sensitive => false }

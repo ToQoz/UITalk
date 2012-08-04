@@ -5,7 +5,7 @@ require 'spec_helper'
 describe User do
   # TODO omniauthからの値のテストも必要あり
   describe '.name' do
-    it 'は、重複する場合は保存しない' do
+    it 'は、重複する場合は保存しない。' do
       user1 = FactoryGirl.create(:user, { name: "toqoz" })
       user2 = FactoryGirl.build(:user, { name: "toqoz" })
       user2.should_not be_valid
@@ -13,8 +13,16 @@ describe User do
     end
   end
 
+  describe '.password' do
+    it 'が、空だと保存失敗する。' do
+      user = FactoryGirl.build(:user, { password: "" })
+      user.should_not be_valid
+      user.should have(1).error_on(:password)
+    end
+  end
+
   describe '.email' do
-    it 'は、重複する場合は保存しない' do
+    it 'は、重複する場合は保存しない。' do
       user1 = FactoryGirl.create(:user, { email: "toqoz403@gmail.com" })
       user2 = FactoryGirl.build(:user, { email: "toqoz403@gmail.com" })
       user2.should_not be_valid
@@ -23,12 +31,12 @@ describe User do
   end
 
   describe '.uid' do
-    it 'は、.providerが空でない時に, 空である場合は保存しない' do
+    it 'は、.providerが空でない時に、空である場合は保存しない。' do
       user = FactoryGirl.build(:user, { provider: "twitter" })
       user.should_not be_valid
       user.should have(1).error_on(:uid)
     end
-    it 'は、重複する場合は保存しない' do
+    it 'は、.providerが同じ時に、重複する場合は保存しない。' do
       uid = "11111"
       user1 = FactoryGirl.create(:user, { provider: "twitter", uid: uid })
       user2 = FactoryGirl.build(:user, { provider: "twitter", uid: uid })
@@ -38,12 +46,12 @@ describe User do
   end
 
   describe '.provider' do
-    it 'は、.uidが空でない時に, 空である場合は保存しない' do
+    it 'は、.uidが空でない時に、空である場合は保存しない。' do
       user = FactoryGirl.build(:user, { uid: "111111" })
       user.should_not be_valid
       user.should have(1).error_on(:provider)
     end
-    it 'は、不正な[User.provider_listに含まれない]値の場合は保存しない' do
+    it 'は、不正な[User.provider_listに含まれない]値の場合は保存しない。' do
       user = FactoryGirl.build(:user, { provider: "hogetter", uid: "111111" })
       user.should_not be_valid
       user.should have(1).error_on(:provider)
