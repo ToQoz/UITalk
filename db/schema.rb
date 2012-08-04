@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20120721034404) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.string   "body"
+    t.boolean  "available"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
