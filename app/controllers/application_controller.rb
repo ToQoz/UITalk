@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :correct_user?
 
+  after_filter CompressFilter.new
+
   private
 
   def current_user
