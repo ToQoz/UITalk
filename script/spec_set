@@ -8,5 +8,7 @@ if [ ! $DB ] ; then export DB=sqlite; fi
 bundle exec rake db:migrate test
 
 # run spec
-bundle exec rake spec
+bundle exec rake spec:models
+bundle exec rake spec:controllers
 bundle exec rspec spec/env/*_spec.rb
+bundle exec rspec spec/deploy/*_spec.rb
