@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ ! $DB ] ; then export DB=sqlite; fi
+if [ ! $CONSOLE_ENV ] ; then export CONSOLE_ENV=sandbox; fi
+
+if [ "${CONSOLE_ENV}" = "raw" ] ; then
+    bundle exec rails console
+else
+    bundle exec rails console --sandbox
+fi

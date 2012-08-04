@@ -59,6 +59,15 @@ if defined? Hirb
 end
 ```
 
+## rails console with pry
+
+```ruby
+# sandbox env
+$ script/console
+# not sandbox env
+$ CONSOLE_ENV=raw script/console
+```
+
 ## Git便利hooks
 ### Masterへのコミット禁止
 
