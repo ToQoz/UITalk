@@ -17,20 +17,20 @@ ActiveRecord::Schema.define(:version => 20120804060938) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.string   "body"
-    t.boolean  "available", :default => true
+    t.boolean  "available"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",    :limit => 255
     t.string   "title"
     t.string   "body"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.string   "domain",     :default => ""
-    t.string   "image",      :default => ""
-    t.boolean  "available",  :default => true
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.string   "domain",                    :default => ""
+    t.string   "image",                     :default => ""
+    t.boolean  "available",                 :default => true
   end
 
   create_table "users", :force => true do |t|

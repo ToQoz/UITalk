@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :post
 
-  attr_accessible :available, :body, :post_id, :user_id
+  attr_accessible :available, :body, :post_id, :user_id, :good_count, :bad_count
 
   validates :body, :presence => true, :length => { :maximum => 1500 }
   validates :post_id, :presence => true
