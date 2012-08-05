@@ -17,7 +17,9 @@ ActiveRecord::Schema.define(:version => 20120804060938) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.string   "body"
-    t.boolean  "available"
+    t.integer  "good_count", :default => 0
+    t.integer  "bad_count", :default => 0
+    t.boolean  "available", :default => true
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
