@@ -5,5 +5,11 @@
 # t.boolean "available"
 
 class PostEvaluation < ActiveRecord::Base
-  attr_accessible :available, :count, :post_id
+  belongs_to :post
+
+  attr_accessible :post_id, :good_count, :bad_count, :available
+
+  def total
+    good_count - bad_count
+  end
 end
