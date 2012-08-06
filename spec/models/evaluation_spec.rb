@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Eval do
+describe Evaluation do
   describe '.kind' do
     context 'good評価を登録しようとした時、' do
       let(:eval) { FactoryGirl.build(:good_kind_eval) }
@@ -28,7 +28,7 @@ describe Eval do
   end
 
   describe '#kind_list' do
-    subject { Eval.new.kind_list }
+    subject { Evaluation.new.kind_list }
     it { should eq([ "1", "2"]) }
   end
 
@@ -42,7 +42,7 @@ describe Eval do
     end
 
     describe '#default_scopeは有効なレコードのみを含む。' do
-      subject { Eval.all }
+      subject { Evaluation.all }
       it {
         should include(good)
         should include(bad)
@@ -54,7 +54,7 @@ describe Eval do
     end
 
     describe '#goodは、goodと評価されたものだけを含む。' do
-      subject { Eval.good }
+      subject { Evaluation.good }
       it {
         should include(good)
         should_not include(bad)
@@ -62,7 +62,7 @@ describe Eval do
     end
 
     describe '#badは、badと評価されたものだけを含む。' do
-      subject { Eval.bad }
+      subject { Evaluation.bad }
       it {
         should include(bad)
         should_not include(good)

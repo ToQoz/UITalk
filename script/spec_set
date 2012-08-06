@@ -11,7 +11,7 @@ set -e
 if [ ! $DB ] ; then export DB=sqlite; fi
 
 # migrate
-bundle exec rake db:migrate test
+RAILS_ENV=test bundle exec rake db:migrate
 
 # run spec
 bundle exec rspec spec
