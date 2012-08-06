@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# description:
+#   alias for run spec set.
+#   /controllers/models/env/deploy
+# example:
+#   $ script/spec_set
+
 set -e
 
 if [ ! $DB ] ; then export DB=sqlite; fi

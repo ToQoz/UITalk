@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# description:
+#   alias for take coverage when you run rspec.
+# example:
+#   $ script/cov
+
 set -e
 
 if [ ! $DB ] ; then export DB=sqlite; fi

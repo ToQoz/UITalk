@@ -1,3 +1,11 @@
 #!/bin/sh
 
+# description:
+#   create spec file was missing.
+#   exec script/gspec.rb. actual processing is written in script/gspec.rb.
+# example:
+#   $ script/gspec
+#   # you will be asked create spec for each spec file in an individual.
+#   # if you answer y, this will be created.
+
 ruby $(cd "$(dirname $0)"/.. && pwd)/script/gspec.rb
