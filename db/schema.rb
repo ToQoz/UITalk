@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806130747) do
+ActiveRecord::Schema.define(:version => 20120806133345) do
 
   create_table "evaluations", :force => true do |t|
     t.integer  "user_id"
@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(:version => 20120806130747) do
 
   create_table "post_evaluations", :force => true do |t|
     t.integer  "post_id"
-    t.integer  "count"
+    t.integer  "good_count"
     t.boolean  "available",  :default => true
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+    t.integer  "bad_count"
   end
 
   create_table "posts", :force => true do |t|
