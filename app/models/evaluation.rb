@@ -5,7 +5,7 @@
 # t.string  "kind"
 # t.boolean "available"
 
-class Eval < ActiveRecord::Base
+class Evaluation < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
 
