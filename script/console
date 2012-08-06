@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# description:
+#   rails console wrapper
+# example:
+#   $ script/console
+
 set -e
 
 if [ ! $DB ] ; then export DB=sqlite; fi

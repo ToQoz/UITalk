@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe :CheckConfigFiles do
+describe :CheckConfigFiles, :deploy => true do
   it {
     File.exists?("#{Rails.root}/config/initializers/omniauth.rb").should be_true
   }
