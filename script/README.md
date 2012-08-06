@@ -13,4 +13,4 @@ rspecでcoverageを測るためのwrapper
 足りないspecを作成するためのscript
 
 ## script/spec_set
-push前に通すべきspecを実行するscript
+push前に通すべきspecを実行するscript. migrationもしてくれる.
