@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # t.integer "post_id"
-# t.integer  "count"
+# t.integer "good_count"
+# t.integer "bad_count"
 # t.boolean "available"
 
 class PostEvaluation < ActiveRecord::Base
