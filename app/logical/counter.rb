@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+class NotCounterbleError < StandardError; end
+
 module Counter
 
   module ClassMethods
@@ -15,12 +17,8 @@ module Counter
 
     # use method missing for increase counter of various accessor
     if /^increase_/ =~ method_name
-      accessor_name = method_name.sub('increase_', '')
-      if countable.include? accessor_name
-        increase accessor_name rescue super
-      else
-        super
-      end
+      attr = method_name.sub('increase_', '')
+      increase attr
     elsif
       super
     end
@@ -33,6 +31,8 @@ module Counter
   #
   # Returns instance of this class for metod chain
   def increase(attr)
+    raise NoMethodError, "undefined method `#{attr}` for #{self}" unless self.respond_to?(attr)
+    raise NotCounterbleError, "not countable attributs `#{attr}` for #{self}" unless countable.include? attr
     self.send("#{attr}=", self.send(attr).send(:+, 1))
   end
 end
