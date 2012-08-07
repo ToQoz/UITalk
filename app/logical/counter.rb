@@ -34,6 +34,5 @@ module Counter
   # Returns instance of this class for metod chain
   def increase(attr)
     self.send("#{attr}=", self.send(attr).send(:+, 1))
-    self
   end
 end
