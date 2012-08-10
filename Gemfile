@@ -25,6 +25,10 @@ gem 'jquery-rails'
 gem "omniauth-twitter"
 gem 'bcrypt-ruby'
 
+group :development do
+  gem 'rails-erd'
+end
+
 group :test, :development do
   gem 'pry-rails'
   gem 'pry-coolline'
