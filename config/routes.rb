@@ -18,7 +18,6 @@ UITalk::Application.routes.draw do
     resources :comments
   end
   resources :users
-  end
   resources :home, :only => [ :index ]
 
   # The priority is based upon order of creation:
