@@ -17,10 +17,7 @@ UITalk::Application.routes.draw do
   resources :posts do
     resources :comments
   end
-  resources :users do
-    member do
-       get ':name', :action => 'show'
-    end
+  resources :users
   end
   resources :home, :only => [ :index ]
 
