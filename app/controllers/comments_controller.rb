@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-<<<<<<< HEAD
   respond_to :html, :json
 
   # allow from login user
