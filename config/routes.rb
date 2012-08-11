@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 UITalk::Application.routes.draw do
+
   root :to => 'home#index'
 
   # OmniAuth Callback
@@ -13,7 +14,9 @@ UITalk::Application.routes.draw do
   match 'accounts/signup', :via => :get, :to => 'users#new'
   match 'accounts/signup', :via => :post, :to => 'users#create'
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   resources :users
   resources :home, :only => [ :index ]
 
