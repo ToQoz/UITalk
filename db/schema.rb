@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120811052335) do
+ActiveRecord::Schema.define(:version => 20120811064450) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120811052335) do
     t.datetime "updated_at",                   :null => false
   end
 
-  create_table "evaluations", :force => true do |t|
+  create_table "post_evaluations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.string   "kind"
@@ -31,24 +31,15 @@ ActiveRecord::Schema.define(:version => 20120811052335) do
     t.datetime "updated_at",                   :null => false
   end
 
-  create_table "post_evaluations", :force => true do |t|
-    t.integer  "post_id"
-    t.integer  "good_count"
-    t.boolean  "available",  :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.integer  "bad_count"
-  end
-
   create_table "posts", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",    :limit => 255
     t.string   "title"
     t.string   "body"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.string   "domain",     :default => ""
-    t.string   "image",      :default => ""
-    t.boolean  "available",  :default => true
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.string   "domain",                    :default => ""
+    t.string   "image",                     :default => ""
+    t.boolean  "available",                 :default => true
   end
 
   create_table "users", :force => true do |t|
