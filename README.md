@@ -68,6 +68,23 @@ $ script/console
 $ CONSOLE_ENV=raw script/console
 ```
 
+## rails-erb
+
+https://github.com/voormedia/rails-erd
+
+### requirement
+
+```ruby
+$ brew install graphviz 
+```
+
+### exec
+
+```ruby
+# create ER graph in doc/ER.pdf
+$ script/erd
+```
+
 ## Git便利hooks
 ### Masterへのコミット禁止
 
