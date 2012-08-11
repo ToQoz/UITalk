@@ -11,7 +11,7 @@ sqlite: &sqlite
 mysql: &mysql
   adapter: mysql2
   username: root
-  password:
+  password: <%= "#{ENV['DB_PASSWORD']}" %>
   database: myapp_<%= Rails.env %>
 
 defaults: &defaults
