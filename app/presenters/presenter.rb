@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Presenter
   def self.h(s)
     CGI.escapeHTML(s)
