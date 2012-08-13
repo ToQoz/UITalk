@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# description:
+#   wrapper for rspec
+# example:
+#   $ script/spec [rspec arg and options]
+#
+#   # exec spec set
+#   $ script/spec
+#
+#   # exec model spec
+#   $ script/spec spec/models/*_spec.rb
+
+
+set -e
+
+if [ ! $DB ] ; then export DB=sqlite; fi
+export RAILS_ENV=test
+
+not_exists() {
+    error_with_msg "$1 is not exists"
+}
+
+error_with_msg() {
+    RED_START=$'\e[0;31m'
+    COROR_END=$'\e[m'
+    echo $RED_START$1$COLOR_END
+    exit 1
+}
+
+operation() {
+    # check exists of file or directory
+    if [ "$1" = "" ] ; then
+        SPEC="spec"
+    else
+        SPEC=$1
+        shift
+    fi
+
+    if [ ! -f "$SPEC" -a ! -d "$SPEC" ] ; then
+        not_exists $SPEC
+    fi
+
+    # migrate
+    bundle exec rake db:migrate
+    # run spec
+    bundle exec rspec $SPEC $*
+}
+
+operation $*

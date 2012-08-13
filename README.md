@@ -1,4 +1,9 @@
 # UITalk
+## Documents
+
+[Wiki](./wiki)
+
+
 ## 実行
 
 ```sh
@@ -21,106 +26,6 @@ $ DB=sqlite bundle exec rspec spec/env/*_spec.rb
 
 # DB名を環境変数に入れれば良いというだけ
 $ DB=sqlite bundle exec rails s
-```
-
-## ~/.pryrc sample
-
-```ruby
-# pryでSQLのログ流す
-if defined? ActiveRecord
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-end
-
-# ActiveRecordなどのfindの結果をテーブルで見やすく表示
-begin
-  require 'hirb'
-rescue LoadError
-  # Missing goodies, bummer
-end
-
-if defined? Hirb
-  # Slightly dirty hack to fully support in-session Hirb.disable/enable toggling
-  Hirb::View.instance_eval do
-    def enable_output_method
-      @output_method = true
-      @old_print = Pry.config.print
-      Pry.config.print = proc do |output, value|
-        Hirb::View.view_or_page_output(value) || @old_print.call(output, value)
-      end
-    end
-
-    def disable_output_method
-      Pry.config.print = @old_print
-      @output_method = nil
-    end
-  end
-
-  Hirb.enable
-end
-```
-
-## rails console with pry
-
-```ruby
-# sandbox env
-$ script/console
-# not sandbox env
-$ CONSOLE_ENV=raw script/console
-```
-
-## rails-erb
-
-https://github.com/voormedia/rails-erd
-
-### requirement
-
-```ruby
-$ brew install graphviz 
-```
-
-### exec
-
-```ruby
-# create ER graph in doc/ER.pdf
-$ script/erd
-```
-
-## Git便利hooks
-### Masterへのコミット禁止
-
-```sh
-$ vi .git/hooks/pre-commit
-----------------------------
-
-#! /bin/sh
-# https://github.com/bleis-tift/Git-Hooks/blob/master/pre-commit
-
-get_git_branch_name(){
-    branch="$(git symbolic-ref HEAD 2>/dev/null)" ||
-           "$(git describe --contains --all HEAD)"
-    echo ${branch##refs/heads/}
-}
-is_on_master_branch() {
-    if [ "$(get_git_branch_name)" = "master" ]; then
-        return 0
-    fi
-    return 1
-}
-
-if [ -z "$(git branch)" ]; then
-    exit 0
-fi
-
-is_on_master_branch
-if [ $? -eq 0 ]; then
-    echo "can't commit on master branch."
-    echo "please commit on topic branch."
-    exit 1
-fi
-
-exit 0
-----------------------------
-$ chmod +x .git/hooks/pre-commit
 ```
 
 ## Contributes by Pull Request

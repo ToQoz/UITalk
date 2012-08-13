@@ -24,5 +24,10 @@ describe :File do
       content = File.open(f).read
       (/(console\.(log)|(info)|(debug))|(debugger)/i =~ content).should be_nil
     end
+
+    it "#{f}には、tab文字が含まれていない.", :if => !File.directory?(f) && /\.(png)|(jpe?g)|(gif)$/ !~ f do
+      content = File.open(f).read
+      (/	/i =~ content).should be_nil
+    end
   }
 end

@@ -15,5 +15,5 @@ ER図を出力するためのwrapper
 ## script/gspec
 足りないspecを作成するためのscript
 
-## script/spec_set
-push前に通すべきspecを実行するscript migrationもしてくれる
+## script/spec
+rspecのwrapper. script migrationもしてくれる
