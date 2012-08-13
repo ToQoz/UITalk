@@ -1,7 +1,7 @@
 # UITalk
 ## Documents
 
-[Wiki](./wiki)
+[Wiki](https://github.com/ToQoz/UITalk/wiki)
 
 
 ## 実行
