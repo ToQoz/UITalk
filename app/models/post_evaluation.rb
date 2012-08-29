@@ -18,19 +18,4 @@ class PostEvaluation < ActiveRecord::Base
   scope :bad, where(kind: '2')
 
   include Evaluation
-
-  #def kind_list
-    # "1": good
-    # "2": bad
-  #  [ "1", "2" ]
-  #end
-
-#private
-#  def include_by_kind?
-#    kind_list.include? kind
-#  end
-#
-#  def kind_valid?
-#    errors.add(:kind, 'kindが不正') unless include_by_kind?
-#  end
 end
