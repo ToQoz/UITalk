@@ -7,14 +7,14 @@ describe PostEvaluation do
     context 'good評価を登録しようとした時、' do
       let(:eval) { FactoryGirl.build(:good_kind_post_eval) }
       it {
-        eval.kind.should eq("1")
+        eval.kind.should eq(1)
         eval.should be_valid
       }
     end
     context 'bad評価を登録しようとした時、' do
       let(:eval) { FactoryGirl.build(:bad_kind_post_eval) }
       it {
-        eval.kind.should eq("2")
+        eval.kind.should eq(2)
         eval.should be_valid
       }
     end
@@ -29,7 +29,7 @@ describe PostEvaluation do
 
   describe '#kind_list' do
     subject { PostEvaluation.new.kind_list }
-    it { should eq([ "1", "2"]) }
+    it { should eq([ 1, 2]) }
   end
 
   describe 'name_scope' do
