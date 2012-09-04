@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818115510) do
+ActiveRecord::Schema.define(:version => 20120903070109) do
 
   create_table "comment_evaluations", :force => true do |t|
     t.integer  "user_id"
@@ -49,6 +49,25 @@ ActiveRecord::Schema.define(:version => 20120818115510) do
     t.string   "domain",                    :default => ""
     t.string   "image",                     :default => ""
     t.boolean  "available",                 :default => true
+  end
+
+  create_table "project_members", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.boolean  "available",  :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "role",       :default => 1
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "is_public"
+    t.boolean  "available",                  :default => true
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "owner_id",    :limit => 255, :default => 1
   end
 
   create_table "users", :force => true do |t|

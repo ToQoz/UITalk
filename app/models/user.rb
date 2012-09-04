@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
 
+  has_many :project_members
+  has_many :projects, :through => :project_members
+
   has_secure_password
   attr_accessible :id, :name, :email, :image, :provider, :uid, :password, :password_confirmation, :password_digest
 
