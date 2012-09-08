@@ -16,6 +16,11 @@ describe Tag do
       it { tag.should_not be_valid }
     end
 
+    context 'が全角の場合はエラー' do
+      let(:tag) { FactoryGirl.build(:name_full_width) }
+      it { tag.should_not be_valid }
+    end
+
     context "が重複して登録されている場合は登録されない" do
       let(:tag) {
         FactoryGirl.create(:name)
@@ -23,5 +28,7 @@ describe Tag do
       }
       it { tag.should_not be_valid }
     end
+
+
   end
 end
