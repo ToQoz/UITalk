@@ -7,10 +7,15 @@ class SessionsController < ApplicationController
 
   def create
     authManager = AuthManager.new request.env["omniauth.auth"], session
-    if authManager.authenticate
-      redirect_to root_url, notice: 'Signed in!'
-    else
-      redirect_to controller: :users, action: :new
+
+    begin
+      if authManager.authenticate
+        redirect_to root_url, notice: 'Signed in!'
+      else
+        redirect_to controller: :users, action: :new
+      end
+    rescue UITalk::NotValidCredential
+      redirect_to root_url, alert: 'User credentials are not valid'
     end
   end
 
@@ -23,5 +28,5 @@ class SessionsController < ApplicationController
     redirect_to root_url, alert: "Authentication error: #{params[:message].humanize}"
   end
 
-private
+  private
 end

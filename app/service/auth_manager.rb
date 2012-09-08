@@ -6,15 +6,31 @@ class AuthManager
     @session = session
   end
 
+  def token
+    @thridparty_auth_data["extra"]["access_token"].token
+  end
+
+  def secret
+    @thridparty_auth_data["extra"]["access_token"].secret
+  end
+
   def authenticate
-    user = User.thirdparty_auth_data_is(@thridparty_auth_data).first
-    if user != nil
+    # http://rdoc.info/gems/twitter/Twitter/API#verify_credentials-instance_method
+    # client.current_user is verify user
+    # Twitter::Error::Unauthorized raised when supplied user credentials are not valid.
+    begin
+      Twitter::Client.new(oauth_token: token, oauth_token_secret: secret).current_user
+    rescue
+      raise UITalk::NotValidCredential
+    end
+
+    unless (user = User.thirdparty_auth_data_is(@thridparty_auth_data).first) == nil
       @session[:user_id] = user.id
       destroy_thridparty_auth_data
-      return true
+      true
     else
       store_thridparty_auth_data @thridparty_auth_data
-      return false
+      false
     end
   end
 
