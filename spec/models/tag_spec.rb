@@ -2,10 +2,6 @@
 
 require 'spec_helper'
 
-# タグは半角文字で登録されること
-# タグは50文字以内？
-# 重複したタグは登録されないこと
-
 describe Tag do
 
   describe '.name' do
