@@ -32,6 +32,7 @@ end
 group :test, :development do
   gem 'pry-rails'
   gem 'pry-coolline'
+  gem 'pry-nav'
   gem 'hirb'
   gem 'rspec-rails', ">= 2.8.1"
 end
