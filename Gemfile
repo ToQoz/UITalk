@@ -22,6 +22,7 @@ end
 
 gem 'jquery-rails'
 gem "omniauth-twitter"
+gem "twitter"
 gem 'bcrypt-ruby'
 
 group :development do
