@@ -1,18 +1,28 @@
-<%= form_for(:post) do |p| %>
-  <div id="title_text_field"><%= p.text_field :title %></div>
-  <div id="body_text_area"><%= p.text_area :body %></div>
-  <div id="image_file_field"><%= p.file_field :image %></div>
-  <%= p.submit %>
-<% end %>
-
-<div id="all_post">
-  <% @posts.each do |p| %>
-  <div class='post'>
-    <h2><%= link_to p.title, { controller: :posts, action: :show, id: p.id } %></h2>
-    <p><%= p.body %></p>
-    <!--<p><%=
-    #image_tag image_url_by_id(p.id), width: 50, height: 50
-    %></p>-->
-  </div>
+<div id="main">
+  <%= form_for(:post) do |p| %>
+    <div id="title_text_field">
+      <%= p.text_field :title %>
+    </div>
+    <div id="body_text_area">
+      <%= p.text_area :body %>
+    </div>
+    <div class="image_file_field"
+      <%= p.file_field :image %>
+    </div>
+    <%= p.submit %>
   <% end %>
+
+  <div id="post_set">
+    <% @posts.each do |p| %>
+    <div class='post'>
+      <h2><%= link_to p.title, { controller: :posts, action: :show, id: p.id } %></h2>
+      <p><%= p.body %></p>
+      <!--<p><%=
+      #image_tag image_url_by_id(p.id), width: 50, height: 50
+      %></p>-->
+    </div>
+    <% end %>
+  </div>
+  <div id="account_ctrl_panel">
+  </div>
 </div>
