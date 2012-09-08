@@ -10,4 +10,7 @@ FactoryGirl.define do
   factory :name_max_length, class: Tag do |f|
     f.name "a" * 21
   end
+  factory :name_full_width, class: Tag do |f|
+    f.name "テスト"
+  end
 end
