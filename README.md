@@ -11,6 +11,10 @@ $ cp config/initializers/omniauth.rb.sample config/initializers/omniauth.rb
 # 自分の環境に合わせて Change it! 部分を変える.
 $ vi config/initializers/omniauth.rb
 
+$ cp config/initializers/twitter.rb.sample config/initializers/twitter.rb
+# 自分の環境に合わせて Change it! 部分を変える.
+$ vi config/initializers/twitter.rb
+
 $ cp config/initializers/secret_token.rb.sample config/initializers/secret_token.rb
 # 自分の環境に合わせて Change it! 部分を変える.
 $ vi config/initializers/secret_token.rb

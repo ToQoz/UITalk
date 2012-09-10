@@ -1,0 +1,4 @@
+Twitter.configure do |config|
+  config.consumer_key = "YOUR CONSUMER KEY"       # Change it!
+  config.consumer_secret = "YOUR CONSUMER SECRET" # Change it!
+end
