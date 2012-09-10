@@ -35,6 +35,7 @@ group :test, :development do
   gem 'pry-nav'
   gem 'hirb'
   gem 'rspec-rails', ">= 2.8.1"
+  gem 'rails-sh'
 end
 
 group :test do

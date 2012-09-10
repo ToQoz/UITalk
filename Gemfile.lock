@@ -115,6 +115,8 @@ GEM
     pry-coolline (0.1.5)
       coolline (~> 0.3)
       io-console (~> 0.3.0)
+    pry-nav (0.2.2)
+      pry (~> 0.9.10)
     pry-rails (0.1.6)
       pry
     rack (1.4.1)
@@ -137,6 +139,7 @@ GEM
       activesupport (>= 3.0)
       choice (~> 0.1.6)
       ruby-graphviz (~> 1.0.4)
+    rails-sh (1.5.2)
     railties (3.2.6)
       actionpack (= 3.2.6)
       activesupport (= 3.2.6)
@@ -217,9 +220,11 @@ DEPENDENCIES
   mysql2
   omniauth-twitter
   pry-coolline
+  pry-nav
   pry-rails
   rails (= 3.2.6)
   rails-erd
+  rails-sh
   rspec-rails (>= 2.8.1)
   sass-rails (~> 3.2.3)
   simplecov
