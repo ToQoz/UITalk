@@ -41,8 +41,8 @@ class User < ActiveRecord::Base
 
         yield
       rescue => e
-        logger.error e.message
-        logger.error e.backtrace.join("\n")
+        Rails.logger.error e.message
+        Rails.logger.error e.backtrace.join("\n")
 
         raise ActiveRecord::Rollback
       end

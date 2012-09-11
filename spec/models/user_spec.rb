@@ -122,11 +122,23 @@ describe User do
 
   context '画像の保存に失敗した時、' do
     describe '#save' do
-      it 'は、ロールバックする。' do
-        user = FactoryGirl.build(:user)
+      let (:rails_mock) { mock("Rails") }
+      let (:logger_mock) { mock("Rails.logger") }
+      let (:user) { FactoryGirl.build(:user) }
+
+      before :all do
         user.stubs(:save_profile_image!).raises
+        rails_mock.stubs(:logger).returns(logger_mock)
+      end
+
+      it 'は、ロールバックする。' do
         user.save.should eq(nil)
         lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'logger#errorが、呼ばれる。' do
+        user.save
+        rails_mock.logger.expects(:error)
       end
     end
     describe '#save' do
