@@ -64,7 +64,9 @@ class User < ActiveRecord::Base
   module ProfileImageMethods
     module Config
       def profile_image_dir
-        dir = "public/uploaded/#{self.class.to_s.underscore}"
+        raise StandardError, "uuid is blank" if uuid.to_s == ""
+
+        dir = "public/uploaded/#{self.class.to_s.underscore}/#{uuid}"
         dir_expanded_path = File.expand_path dir
 
         FileUtils.mkdir_p(dir_expanded_path) unless File.exists?(File.dirname(dir_expanded_path))
@@ -75,11 +77,12 @@ class User < ActiveRecord::Base
 
     module Uploader
       def save_profile_image!
+        filename_without_ext = generate_uuid
         if profile_image
-          self.profile_image_filename = "#{uuid}.#{profile_image_ext}"
+          self.profile_image_filename = "#{filename_without_ext}.#{profile_image_ext}"
           save_profile_image
         else
-          self.profile_image_filename = "#{uuid}.#{default_profile_image_ext}"
+          self.profile_image_filename = "#{filename_without_ext}.#{default_profile_image_ext}"
           save_default_profile_image
         end
       end
@@ -100,7 +103,7 @@ class User < ActiveRecord::Base
 
     module Ext
       def profile_image_ext
-        return default_profile_image_ext unless [ 'image/png', 'image/jpg', 'image/jpeg' ].map { |t| profile_image.content_type === t }.include? true
+        return default_profile_image_ext unless [ 'image/png', 'image/jpg', 'image/jpeg', 'image/gif' ].map { |t| profile_image.content_type === t }.include? true
         profile_image.content_type.gsub(/^image\//, "")
       end
 
