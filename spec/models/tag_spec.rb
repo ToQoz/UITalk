@@ -29,6 +29,10 @@ describe Tag do
       it { tag.should_not be_valid }
     end
 
-
+    context "は、存在しているタグ名が与えられた場合、1件含む" do
+      let(:tag) { FactoryGirl.create(:name) }
+      subject { Tag.name_is(:name) }
+      it { should be_true }
+    end
   end
 end

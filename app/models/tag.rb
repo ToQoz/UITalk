@@ -8,4 +8,6 @@ class Tag < ActiveRecord::Base
 
   validates_format_of :name, :with => /^[ -~｡-ﾟ]*$/
 
+  scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
+
 end
