@@ -1,0 +1,6 @@
+<h1>Accounts#setting</h1>
+
+<%= form_for(@user, { method: :put }) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
