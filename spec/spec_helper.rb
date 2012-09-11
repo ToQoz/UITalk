@@ -25,6 +25,7 @@ Spork.prefork do
   end
 
   require 'rspec/rails'
+  require 'rspec/rails/mocha'
   require 'rspec/autorun'
 
   require 'database_cleaner'
@@ -40,7 +41,7 @@ Spork.prefork do
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
     #
-    # config.mock_with :mocha
+    config.mock_with :mocha
     # config.mock_with :flexmock
     # config.mock_with :rr
 

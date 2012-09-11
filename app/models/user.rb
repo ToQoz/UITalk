@@ -37,13 +37,7 @@ class User < ActiveRecord::Base
         self.uuid = generate_uuid
         raise UITalk::NotValidUUID, "self.uuid is \"\"." if self.uuid.to_s == ""
 
-        if profile_image
-          self.profile_image_filename = "#{uuid}.#{profile_image_ext}"
-          save_profile_image
-        else
-          self.profile_image_filename = "#{uuid}.#{default_profile_image_ext}"
-          save_default_profile_image
-        end
+        save_profile_image!
 
         yield
       rescue => e
@@ -80,6 +74,16 @@ class User < ActiveRecord::Base
     include Config
 
     module Uploader
+      def save_profile_image!
+        if profile_image
+          self.profile_image_filename = "#{uuid}.#{profile_image_ext}"
+          save_profile_image
+        else
+          self.profile_image_filename = "#{uuid}.#{default_profile_image_ext}"
+          save_default_profile_image
+        end
+      end
+
       def save_profile_image
         File.open(profile_image_path, 'wb') { |f| f.write(profile_image.read) }
       end

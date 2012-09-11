@@ -29,7 +29,7 @@ describe UsersController do
 
   describe 'UsersController#index' do
     before :each do
-      User.stub(:limit).and_return([ user ])
+      User.stubs(:limit).returns([ user ])
     end
 
     it 'は、作成済みのユーザーの配列(Userモデルのインスタンスの配列)を@usersにアサインする。' do
@@ -40,7 +40,7 @@ describe UsersController do
 
   describe 'UsersController#show' do
     before :each do
-      User.stub(:name_is).with(user.to_param).and_return([ user ])
+      User.stubs(:name_is).with(user.to_param).returns([ user ])
     end
 
     it 'は、nameで指定されたUserモデルのインスタンスを@userにアサインする。' do
@@ -52,7 +52,7 @@ describe UsersController do
   describe 'UsersController#new' do
     it 'は、Userモデルにnewメッセージを { name: oauthのニックネーム } というパラメータと一緒に送る。' do
       session[:oauth_nickname] = "ToQoz"
-      User.should_receive(:new).with(name: "ToQoz")
+      User.expects(:new).with(name: "ToQoz")
 
       post :new
       session[:oauth_nickname] = nil
@@ -64,21 +64,21 @@ describe UsersController do
   end
 
   describe 'UsersController#create' do
-    before(:each) { User.stub new: user }
+    before(:each) { User.stubs new: user }
 
     it 'は、Userモデルにnewメッセージを送る。' do
-      user.should_receive :save
+      user.expects :save
       post :create
     end
 
     it 'は、作成されたユーザのページにリダイレクトする。' do
-      user.should_receive :save
+      user.expects :save
       post :create
       response.should redirect_to(user)
     end
 
     context 'は、User#saveが失敗したとき、' do
-      before(:each) { user.stub(:save).and_return(false) }
+      before(:each) { user.stubs(:save).returns(false) }
 
       it 'ログインできない。(session[:user_id]にuserのidをセットしない。)' do
         post :create
@@ -87,7 +87,7 @@ describe UsersController do
     end
 
     context 'は、User#saveが成功したとき、' do
-      before(:each) { user.stub(:save).and_return(true) }
+      before(:each) { user.stubs(:save).returns(true) }
 
       it 'ログインする。(session[:user_id]にuserのidをセットする)' do
         post :create
