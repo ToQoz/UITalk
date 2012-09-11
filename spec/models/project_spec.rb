@@ -6,6 +6,7 @@ describe Project do
   before :each do
     User.any_instance.stubs(:save_profile_image!)
   end
+
   describe '#member scope' do
     let (:project) { FactoryGirl.create(:project) }
     let (:public_project) { FactoryGirl.create(:public_project) }
