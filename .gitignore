@@ -38,6 +38,7 @@ Thumbs.db
 /.rvmrc
 /vendor/bundles/*
 /public/uploaded/*
+/public/uploaded_users/*
 /config/initializers/secret_token.rb
 /config/initializers/omniauth.rb
 /config/initializers/twitter.rb

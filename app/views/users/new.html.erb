@@ -8,7 +8,8 @@
   <%= errors_for(@user, "Opps, unable to signup").html_safe %>
   <%= f.text_field :name %>
   <%= f.text_field :email %>
-  <%= f.text_field :password %>
-  <%= f.text_field :password_confirmation %>
+  <%= f.file_field :profile_image %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
   <%= f.submit %>
 <% end %>

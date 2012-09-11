@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   has_many :projects, :through => :project_members
 
   has_secure_password
-  attr_accessible :id, :name, :email, :image, :provider, :uid, :password, :password_confirmation, :password_digest
+  attr_accessor :profile_image
+  attr_accessible :uuid, :name, :email, :provider, :uid, :password, :password_confirmation, :password_digest, :profile_image_filename, :profile_image
 
   validate :third_party_oauth_valid?
   validates :uid, :uniqueness => { :case_sensitive => false }
@@ -27,6 +28,111 @@ class User < ActiveRecord::Base
 
   scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
   scope :thirdparty_auth_data_is, lambda { |auth| where(provider: auth[:provider], uid: auth[:uid]) }
+
+  around_save :around_save
+
+  def around_save
+    self.transaction do
+      begin
+        self.uuid = generate_uuid
+        raise UITalk::NotValidUUID, "self.uuid is \"\"." if self.uuid.to_s == ""
+
+        if profile_image
+          self.profile_image_filename = "#{uuid}.#{profile_image_ext}"
+          save_profile_image
+        else
+          self.profile_image_filename = "#{uuid}.#{default_profile_image_ext}"
+          save_default_profile_image
+        end
+
+        yield
+      rescue => e
+        logger.error e.message
+        logger.error e.backtrace.join("\n")
+
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
+  # Custom Setter
+  def uuid=(value)
+    write_attribute(:uuid, value)
+    # raise if same uuid user already exists
+    raise UITalk::NotUniqueUUID unless User.where(uuid: self.uuid).count == 0
+  end
+
+  # Custom Setter/Getter
+  def generate_uuid
+    OpenSSL::Digest::SHA1.hexdigest(UUIDTools::UUID.timestamp_create).downcase
+  end
+
+  module ProfileImageMethods
+    module Config
+      def profile_image_dir
+        dir = "public/uploaded/#{self.class.to_s.underscore}"
+        dir_expanded_path = File.expand_path dir
+
+        FileUtils.mkdir_p(dir_expanded_path) unless File.exists?(File.dirname(dir_expanded_path))
+        dir
+      end
+    end
+    include Config
+
+    module Uploader
+      def save_profile_image
+        File.open(profile_image_path, 'wb') { |f| f.write(profile_image.read) }
+      end
+
+      def save_default_profile_image
+        File.open(profile_image_path, 'wb') { |f|
+          File.open(profile_default_image_path, 'r') { |f_for_read|
+            f.write(f_for_read.read)
+          }
+        }
+      end
+    end
+    include Uploader
+
+    module Ext
+      def profile_image_ext
+        return default_profile_image_ext unless [ 'image/png', 'image/jpg', 'image/jpeg' ].map { |t| profile_image.content_type === t }.include? true
+        profile_image.content_type.gsub(/^image\//, "")
+      end
+
+      def default_profile_image_ext
+        profile_default_image_path.split('.').last
+      end
+    end
+    include Ext
+
+    module Path
+      def profile_image_path
+        "#{Rails.root}/#{profile_image_dir}/#{profile_image_filename}"
+      end
+
+      def profile_default_image_path
+        "#{Rails.root}/public/defaults/user.png"
+      end
+    end
+    include Path
+
+    module Url
+      def profile_image_url
+        # if configured upload_server, set it for host
+        host = begin
+          UITalk::Application.config.upload_server
+        rescue
+          ""
+        end
+
+        "#{host}/#{profile_image_dir.gsub(/public\//, '')}/#{profile_image_filename}"
+      end
+    end
+    include Url
+  end
+
+  include ProfileImageMethods
 
   def to_param
     name
@@ -67,7 +173,9 @@ class User < ActiveRecord::Base
       user
     end
   end
-private
+
+  private
+
   def include_by_provider_list?
     provider_list().include? provider
   end
