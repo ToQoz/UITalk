@@ -3,6 +3,10 @@
 require 'spec_helper'
 
 describe User do
+  before :each do
+    User.any_instance.stubs(:save_profile_image!)
+  end
+
   # TODO omniauthからの値のテストも必要あり
   describe '.name' do
     it 'は、重複する場合は保存しない。' do

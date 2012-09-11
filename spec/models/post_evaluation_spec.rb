@@ -3,6 +3,10 @@
 require 'spec_helper'
 
 describe PostEvaluation do
+  before :each do
+    User.any_instance.stubs(:save_profile_image!)
+  end
+
   describe '.kind' do
     context 'good評価を登録しようとした時、' do
       let(:eval) { FactoryGirl.build(:good_kind_post_eval) }
