@@ -62,4 +62,8 @@ module UITalk
   end
   class NotAuthorized < StandardError; end
   class NotValidCredential < StandardError; end
+  class NotValidContentType < StandardError; end
+  class NotValidFilename < StandardError; end
+  class NotUniqueUUID < StandardError; end
+  class NotValidUUID < StandardError; end
 end

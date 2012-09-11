@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem "omniauth-twitter"
 gem "twitter"
 gem 'bcrypt-ruby'
+gem 'uuidtools'
 
 group :development do
   gem 'rails-erd'
