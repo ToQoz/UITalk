@@ -66,4 +66,5 @@ module UITalk
   class NotValidFilename < StandardError; end
   class NotUniqueUUID < StandardError; end
   class NotValidUUID < StandardError; end
+  class Error < StandardError; end
 end

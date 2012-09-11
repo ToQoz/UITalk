@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     self.transaction do
       begin
         self.uuid = generate_uuid
-        raise UITalk::NotValidUUID, "self.uuid is \"\"." if self.uuid.to_s == ""
+        raise UITalk::NotValidUUID, "uuid should not be blank" if self.uuid.to_s == ""
 
         save_profile_image!
 
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   def uuid=(value)
     write_attribute(:uuid, value)
     # raise if same uuid user already exists
-    raise UITalk::NotUniqueUUID unless User.where(uuid: self.uuid).count == 0
+    raise UITalk::NotUniqueUUID, "uuid is already exists" unless User.where(uuid: self.uuid).count == 0
   end
 
   # Custom Setter/Getter
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   module ProfileImageMethods
     module Config
       def profile_image_dir
-        raise StandardError, "uuid is blank" if uuid.to_s == ""
+        raise UITalk::Error, "uuid is blank" if uuid.to_s == ""
 
         dir = "public/uploaded/#{self.class.to_s.underscore}/#{uuid}"
         dir_expanded_path = File.expand_path dir

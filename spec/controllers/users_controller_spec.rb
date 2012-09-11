@@ -3,6 +3,10 @@
 require 'spec_helper'
 
 describe UsersController do
+  before :each do
+    User.any_instance.stubs(:save_profile_image!)
+  end
+
   let (:user) { FactoryGirl.build :user }
 
   describe :Routing do
@@ -103,8 +107,8 @@ describe UsersController do
       controller.class.skip_before_filter :authenticate_user!
 
       attr = { "name" => "saint_kenji" }
-      User.stubs(:name_is).with(user.to_param).and_return([ user ])
-      user.should_receive(:update_attributes).with(attr)
+      User.stubs(:name_is).with(user.to_param).returns([ user ])
+      user.expects(:update_attributes).with(attr)
       put :update, :id => user.to_param, :user => attr
     end 
   end
