@@ -95,4 +95,17 @@ describe UsersController do
       end
     end
   end
+
+  describe 'UsersController#update' do
+    let (:user) { FactoryGirl.create :user }
+    it 'Userモデルにupdate_attributeメッセージを送る' do
+      controller.class.skip_before_filter :correct_user?    
+      controller.class.skip_before_filter :authenticate_user!
+
+      attr = { "name" => "saint_kenji" }
+      User.stub(:name_is).with(user.to_param).and_return([ user ])
+      user.should_receive(:update_attributes).with(attr)
+      put :update, :id => user.to_param, :user => attr
+    end 
+  end
 end

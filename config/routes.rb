@@ -14,6 +14,9 @@ UITalk::Application.routes.draw do
   match 'accounts/signup', :via => :get, :to => 'users#new'
   match 'accounts/signup', :via => :post, :to => 'users#create'
 
+  match 'accounts/setting' => "accounts#setting"
+  match "accounts/setting", :via => :put, :to => 'users#update'
+
   resources :posts do
     resources :comments
   end
