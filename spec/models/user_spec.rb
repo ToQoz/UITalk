@@ -121,17 +121,21 @@ describe User do
   end
 
   context '画像の保存に失敗した時、' do
-    it 'ロールバックする。' do
-      user = FactoryGirl.build(:user)
-      user.stubs(:save_profile_image!).raises
-      user.save.should eq(nil)
-      lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+    describe '#save' do
+      it 'は、ロールバックする。' do
+        user = FactoryGirl.build(:user)
+        user.stubs(:save_profile_image!).raises
+        user.save.should eq(nil)
+        lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+      end
     end
-    it 'ロールバックする。' do
-      user = FactoryGirl.build(:user)
-      user.stubs(:save_profile_image!).raises
-      lambda { user.save! }.should raise_error(ActiveRecord::RecordNotSaved)
-      lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+    describe '#save' do
+      it 'は、ロールバックする。' do
+        user = FactoryGirl.build(:user)
+        user.stubs(:save_profile_image!).raises
+        lambda { user.save! }.should raise_error(ActiveRecord::RecordNotSaved)
+        lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+      end
     end
   end
 end
