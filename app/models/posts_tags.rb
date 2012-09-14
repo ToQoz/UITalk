@@ -5,8 +5,9 @@
 # t.boolean "available"
 
 class PostsTags < ActiveRecord::Base
-  has_many :posts
-  has_many :tags
+
+  belongs_to :post
+  belongs_to :tag
 
   attr_accessible :available, :post_id, :tag_id
 end
