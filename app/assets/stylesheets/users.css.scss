@@ -35,23 +35,34 @@
       }
     }
   }
-  .attention {
-    margin: 15px 0;
-    padding: 10px;
-    font-size: 12px;
-    color: #6D6D4B;
-    background: #FFFFDE;
-    border: 1px solid #E4E4C6;
-    border-right-color: #EFF2C7;
-    border-bottom-color: #EFF2C7;
-    border-radius: 3px;
+  .graph {
+    height: 250px;
+    margin: 0 0 0 250px;
+    background-color: #CCC;
+
+    font-size: 60px;
+    line-height: 250px;
+    vertical-align: middle;
+    text-align: center;
   }
+
   .latest-post {
     width: 650px;
     margin: 0 0 0 250px;
 
     li {
       border-bottom: 1px solid #CCCCCC;
+    }
+    .attention {
+      margin: 15px 0;
+      padding: 10px;
+      font-size: 12px;
+      color: #6D6D4B;
+      background: #FFFFDE;
+      border: 1px solid #E4E4C6;
+      border-right-color: #EFF2C7;
+      border-bottom-color: #EFF2C7;
+      border-radius: 3px;
     }
   }
 }
