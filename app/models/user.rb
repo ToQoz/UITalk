@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
         dir = "public/uploaded/#{self.class.to_s.underscore}/#{uuid}"
         dir_expanded_path = File.expand_path dir
 
-        FileUtils.mkdir_p(dir_expanded_path) unless File.exists?(File.dirname(dir_expanded_path))
+        FileUtils.mkdir_p(dir_expanded_path) unless File.exists?(dir_expanded_path)
         dir
       end
     end

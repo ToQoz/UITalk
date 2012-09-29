@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20120911030005) do
     t.boolean  "available",                 :default => true
   end
 
+  create_table "posts_tags", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.boolean  "available",  :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
   create_table "project_members", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -68,14 +76,6 @@ ActiveRecord::Schema.define(:version => 20120911030005) do
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
     t.integer  "owner_id",    :limit => 255, :default => 1
-  end
-
-  create_table "posts_tags", :force => true do |t|
-    t.integer  "post_id"
-    t.integer  "tag_id"
-    t.boolean  "available",  :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
   end
 
   create_table "tags", :force => true do |t|
