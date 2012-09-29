@@ -20,15 +20,26 @@ describe Tag do
       let(:tag) { FactoryGirl.build(:name_full_width) }
       it { tag.should_not be_valid }
     end
-
-    context "が重複して登録されている場合は登録されない" do
-      let(:tag) {
-        FactoryGirl.create(:name)
-        FactoryGirl.build(:name)
-      }
-      it { tag.should_not be_valid }
-    end
-
-
   end
+
+  describe '#name_is scope' do
+    before :each do
+      @tag = FactoryGirl.build(:name)
+      @tag.save
+    end
+    context 'は、空文字列を与えられた場合、' do
+      subject { Tag.name_is('') }
+      it 'なにも含まない。' do
+        should have(0).items
+      end
+    end
+    context 'は、存在しているタグ名が与えられた場合、' do
+      subject { Tag.name_is(@tag.name) }
+      it 'そのタグのインスタンスを1件のみ含む。' do
+        should include(@tag)
+        should have(1).items
+      end
+    end
+  end
+
 end
