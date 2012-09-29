@@ -3,6 +3,8 @@
 class Post < ActiveRecord::Base
 
   has_many :comments
+  has_many :posts_tags
+  has_many :tags, :through => :posts_tags
 
   accepts_nested_attributes_for :comments
 
