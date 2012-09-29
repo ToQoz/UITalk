@@ -1,0 +1,63 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require normalize-rails
+ *= require_tree .
+ */
+header {
+  overflow: hidden;
+  background: #FAFAFA;
+  background: -moz-linear-gradient(#FAFAFA, #EAEAEA);
+  background: -webkit-linear-gradient(#FAFAFA, #EAEAEA);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";
+  border-bottom: 1px solid #CACACA;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4),0 0px 10px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    font-weight: normal;
+    font-size: 2em;
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 35px;
+  }
+  .logo a {
+    text-decoration: none;
+  }
+  ul.hmenu {
+    float: right;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 35px;
+    line-height: 35px;
+    vertical-align: middle;
+    list-style-type: none;
+
+    li {
+      float: left;
+      margin: 0 0 0 10px;
+    }
+  }
+}
+
+.content {
+  width: 900px;
+  margin: 0 auto;
+}
+
+#flash_notice {
+  color: blue;
+}
+
+#flash_alert {
+  color: red;
+}
