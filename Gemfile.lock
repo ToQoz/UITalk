@@ -100,6 +100,7 @@ GEM
     multipart-post (1.1.5)
     mysql2 (0.3.11)
     nokogiri (1.5.5)
+    normalize-rails (0.0.1)
     oauth (0.4.6)
     omniauth (1.1.0)
       hashie (~> 1.2)
@@ -225,6 +226,7 @@ DEPENDENCIES
   hirb
   jquery-rails
   mysql2
+  normalize-rails
   omniauth-twitter
   pry-coolline
   pry-nav

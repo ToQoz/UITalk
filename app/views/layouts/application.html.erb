@@ -10,15 +10,19 @@
 </head>
 <body>
   <header>
-    <ul class="hmenu">
-      <%= render 'shared/navigation' %>
-    </ul>
-
+    <div class="content">
+      <h1 class="logo"><%= link_to('UITalk', '/') %></h1>
+      <ul class="hmenu">
+        <%= render 'shared/navigation' %>
+      </ul>
+    </div>
+  </header>
+  <div class="content">
     <%- flash.each do |name, msg| -%>
       <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
     <%- end -%>
-  </header>
-  <%= yield %>
+    <%= yield %>
+  </div>
   <footer>
   </footer>
 </body>
