@@ -19,11 +19,15 @@
   </div>
   <div class="latest-post">
     <ul>
-      <%- @user.posts.each do |p| -%>
-        <li>
-          <h3 class="title"><%= p.title %></h3>
-          <div class="body"><%= p.body %></div>
-        </li> 
+      <%- if @user.posts.count > 0 -%>
+        <%- @user.posts.each do |p| -%>
+          <li>
+            <h3 class="title"><%= link_to(p.title, p) %></h3>
+            <div class="body"><%= p.body %></div>
+          </li> 
+        <%- end -%>
+      <%- else -%>
+        <p class="attention">hoge doesn’t have any public post</p>
       <%- end -%>
     </ul>
   </div>
