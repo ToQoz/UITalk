@@ -1,3 +1,18 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#post_index {
+  .form {
+    border: 1px solid #CCC;
+  }
+
+  .form form {
+    margin: 20px;
+  }
+
+  .post_set {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
