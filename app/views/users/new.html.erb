@@ -2,12 +2,12 @@
   <div class="page_canvas">
     <div class="form">
       <h2>ユーザー情報入力</h2>
-      <%= form_for(@user, { url: '/accounts/signup', method: :post }) do |f| %>
+      <%= form_for(@user, url: '/accounts/signup', method: :post) do |f| %>
         <%= errors_for(@user, "Opps, unable to signup").html_safe %>
-        <span class="input required"><%= f.text_field :name, { class: "must", placeholder: "user name" } %></span>
-        <span class="input required"><%= f.text_field :email, { class: "must", placeholder: "email" } %></span>
-        <span class="input required"><%= f.password_field :password, { class: "must", placeholder: "password" } %></span>
-        <span class="input required"><%= f.password_field :password_confirmation, { class: "must", placeholder: "password confirmation" } %></span>
+        <span class="input required"><%= f.text_field :name, class: "must", placeholder: "user name" %></span>
+        <span class="input required"><%= f.text_field :email, class: "must", placeholder: "email" %></span>
+        <span class="input required"><%= f.password_field :password, class: "must", placeholder: "password" %></span>
+        <span class="input required"><%= f.password_field :password_confirmation, class: "must", placeholder: "retype password" %></span>
         <span class="input"><%= f.file_field :profile_image %></span>
         <span class="input submit"><%= f.submit %></span>
       <% end %>
