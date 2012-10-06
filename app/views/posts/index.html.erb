@@ -12,8 +12,13 @@
     <% @posts.each do |p| %>
     <div class='post'>
       <h2 class="title"><%= link_to p.title, p %></h2>
-      <p class="image"><%= image_tag "/uploaded/#{p.id.to_s}.png" %></p>
-      <p class="body"><%= p.body %></p>
+      <div class="main">
+        <p class="image"><%= image_tag "/uploaded/#{p.id.to_s}.png" %></p>
+        <p class="body"><%= p.body %></p>
+      </div>
+      <div class="meta">
+        <span class="user_name">DummyToQoz</span>
+      </div>
     </div>
     <% end %>
   </div>
