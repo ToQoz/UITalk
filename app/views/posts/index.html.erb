@@ -1,8 +1,8 @@
 <div id="post_index">
   <div class="form">
     <%= form_for(:post) do |p| %>
-      <span class="input required"><%= p.text_field :title %></span>
-      <span class="input required"><%= p.text_area :body %></span>
+      <span class="input required"><%= p.text_field :title, { placeholder: "title" } %></span>
+      <span class="input required"><%= p.text_area :body, { placeholder: "body" } %></span>
       <span class="input"><%= p.file_field :image %></span>
       <%= p.submit %>
     <% end %>
@@ -11,9 +11,9 @@
   <div class="post_set">
     <% @posts.each do |p| %>
     <div class='post'>
-      <h2><%= link_to p.title, p %></h2>
-      <p><%= p.body %></p>
-      <p><%= image_tag "/uploaded/#{p.id.to_s}.png" %></p>
+      <h2 class="title"><%= link_to p.title, p %></h2>
+      <p class="image"><%= image_tag "/uploaded/#{p.id.to_s}.png" %></p>
+      <p class="body"><%= p.body %></p>
     </div>
     <% end %>
   </div>

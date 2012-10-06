@@ -3,16 +3,51 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #post_index {
+
   .form {
+    width: 850px;
     border: 1px solid #CCC;
   }
 
   .form form {
     margin: 20px;
+
+    input[type=text], textarea {
+      width: 700px;
+    }
   }
 
   .post_set {
+    width: 850px;
     margin: 0 auto;
-    text-align: center;
+
+    .post {
+      overflow: hidden;
+      border: solid 1px #CCCCCC;
+      margin-bottom: 10px;
+
+      .title {
+        margin: 10px auto 10px 20px;
+        padding: 0;
+        font-weight: normal;
+      }
+
+      .image {
+        float: left;
+      }
+      .image img {
+        width: 200px;
+        height: 200px;
+        margin: 0 20px 20px 20px;
+      }
+
+      .body {
+        float: left;
+        width: 586px;
+        min-height: 180px;
+        border: 1px solid #CCC;
+        padding: 10px;
+      }
+    }
   }
 }
