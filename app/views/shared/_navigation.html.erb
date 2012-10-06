@@ -1,12 +1,6 @@
 <% if user_signed_in? %>
-  <li>
-  Logged in as <%= current_user.name %>
-  </li>
-  <li>
-  <%= link_to('signout', signout_path, { id: :signout }) %>
-  </li>
+  <li><%= link_to(current_user.name, current_user) %></li>
+  <li><%= link_to('signout', signout_path, { id: :signout }) %></li>
 <% else %>
-  <li>
-  <%= link_to('signin', signin_path,  { id: :signin }) %>
-  </li>
+  <li><%= link_to('signin', signin_path,  { id: :signin }) %></li>
 <% end %>
