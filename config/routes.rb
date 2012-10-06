@@ -2,8 +2,6 @@
 
 UITalk::Application.routes.draw do
 
-  root :to => 'posts#index'
-
   # OmniAuth Callback
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
@@ -22,6 +20,8 @@ UITalk::Application.routes.draw do
   end
   resources :users
   resources :home, :only => [ :index ]
+
+  root :to => 'posts#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
