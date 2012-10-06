@@ -21,6 +21,6 @@ module ApplicationHelper
       html << "\t\t</ul>\n"
       html << "\t</div>\n"
     end
-    html
-  end  
+    html.html_safe
+  end
 end
