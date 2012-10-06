@@ -10,62 +10,6 @@
     -o-border-radius: 6px;
     border-radius: 6px;
     margin: 20px auto 0;
-
-    .form {
-      width: 500px;
-      margin: 20px auto;
-
-      .required:after {
-        content: 'required';
-        color: red;
-        margin-left: 1em;
-        padding: .1em;
-        font-size: .8em;
-      }
-
-      .input {
-        display: block;
-        margin: 0 0 15px 0;
-      }
-      .input.submit {
-        margin: 25px 0 10px 0;
-      }
-
-      input[type=submit] {
-        background: url(http://twitter.toqoz.net/images/toqoz.png) no-repeat #F3F3F3;
-        font-size: 12px;
-        font-weight: bold;
-        color: #6E6E6E;
-        padding: 9px 15px 9px 35px;
-        text-shadow: 0 1px 0 white;
-        border: solid 1px gainsboro;
-        -webkit-transition: all 0.518s ease-in-out;
-        -moz-transition: all 0.518s ease-in-out;
-        -ms-transition: all 0.518s ease-in-out;
-        -o-transition: all 0.518s ease-in-out;
-        transition: all 0.518s ease-in-out;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-        -ms-border-radius: 2px;
-        -o-border-radius: 2px;
-        border-radius: 2px;
-        margin-right: 5px;
-      }
-      input[type=submit]:hover {
-        border: solid 1px #aeaeae;
-        background: url(http://twitter.toqoz.net/images/toqoz.png) no-repeat #d5d5d5;
-      }
-
-      input[type=text], input[type=password] {
-        font-size: 13px;
-        line-height: 20px;
-        padding: 4px;
-        -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-        -o-border-radius: 6px;
-        border: 1px solid rgba(0, 0, 0, .1);
-      }
-    }
   }
 }
 #page_user_show {
@@ -133,6 +77,9 @@
       border-bottom-color: #EFF2C7;
       border-radius: 3px;
     }
+  }
+  .form {
+    width: 500px;
   }
 }
 
