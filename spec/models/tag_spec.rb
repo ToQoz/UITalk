@@ -4,6 +4,21 @@ require 'spec_helper'
 
 describe Tag do
 
+  describe '#name' do
+    context 'は、文字列を与えられた場合、' do
+      subject { Tag.new.name="test" }
+      it 'その値を返す' do
+        should eq("test")
+      end
+    end
+    context 'は、大文字を含んだ文字列を与えられた場合、' do
+      subject { Tag.new.name="Test" }
+      it '全て小文字にして値を返す' do
+        should == "test"
+      end
+    end
+  end
+
   describe '.name' do
 
     context 'が空の場合はエラー' do
