@@ -13,10 +13,6 @@ class Tag < ActiveRecord::Base
 
   scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
 
-  def self.names
-    scoped.map { |tag| tag.name }
-  end
-
   #custome setter
   def name=(value)
     if value.is_a?(String)
