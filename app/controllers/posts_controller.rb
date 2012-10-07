@@ -21,7 +21,7 @@ class PostsController < ApplicationController
         title: params[:post][:title],
         body: params[:post][:body],
         user_id: current_user.id
-      }, params[:post][:image])
+      }, params["post"]["image"])
       respond_with @post
     end
   end
