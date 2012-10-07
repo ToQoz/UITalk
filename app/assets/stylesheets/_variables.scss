@@ -1,0 +1,172 @@
+$content-width: 900px;
+$font-size-big: 16px;
+$font-size-normal: 14px;
+$font-size-small: 12px;
+$color-red: red;
+$color-blue: blue;
+$color-gray: #CCCCCC;
+
+
+@mixin transition($params) {
+  -webkit-transition: $params;
+  -moz-transition: $params;
+  -ms-transition: $params;
+  -o-transition: $params;
+  transition: $params;
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin background-gradient($start, $end) {
+  background: $start;
+  background: -moz-linear-gradient($start, $end);
+  background: -webkit-linear-gradient($start, $end);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='"$start"', endColorstr='"$end"')";
+}
+@mixin after-note {
+  margin-left: 1em;
+  padding: .1em;
+  font-size: .8em;
+}
+@mixin horizontal-list {
+  overflow: hidden;
+  vertical-align: middle;
+  list-style-type: none;
+
+  li {
+    float: left;
+    margin: 0 0 0 10px;
+  }
+}
+@mixin horizontal-dl($width) {
+  div {
+    overflow: hidden;
+    width: $width;
+    border-bottom: 1px solid #CCCCCC;
+
+    dt {
+      float: left;
+      width: $width / 3;
+      color: $color-gray;
+    }
+    dd {
+    }
+  }
+}
+@mixin header-content {
+  margin: 0;
+  padding: 0;
+  height: 35px;
+  line-height: 35px;
+}
+@mixin logo {
+  font-weight: normal;
+  font-size: 2em;
+}
+@mixin submit-button($url) {
+  margin-right: 5px;
+  padding: 9px 15px 9px 35px;
+  background: $url no-repeat #F3F3F3;
+  border: solid 1px gainsboro;
+  font-size: $font-size-small;
+  font-weight: bold;
+  color: #6E6E6E;
+  text-shadow: 0 1px 0 white;
+}
+@mixin submit-button-hover($url) {
+  border: solid 1px #AEAEAE;
+  background: $url no-repeat #D5D5D5;
+}
+@mixin post {
+  $post-border-width: 1px;
+  border: solid 1px $color-gray;
+  margin-bottom: 10px;
+
+  .title {
+    margin: 10px auto 20px 20px;
+    padding: 0;
+    font-weight: normal;
+  }
+
+  .main {
+    $main-margin: 20px;
+    $image-wh: 200px;
+    $image-margin-right: 20px;
+    $body-padding: 10px;
+
+    overflow: hidden;
+    margin: 0 $main-margin $main-margin $main-margin;
+
+    .image {
+      width: $image-wh;
+      height: $image-wh;
+      float: left;
+      margin: 0 $image-margin-right 0 0;
+
+      img {
+        width: $image-wh;
+        height: $image-wh;
+        padding: 0;
+      }
+    }
+
+    .body {
+      $border-width: 1px;
+      float: left;
+      margin: 0;
+      padding: $body-padding;;
+      width: $content-width - (
+        $post-border-width * 2 + // parent of parent (.post)
+        $main-margin * 2 +       // parent (.main)
+        $image-wh +              // .image
+        $image-margin-right +
+        
+        $body-padding * 2 +      // self (.body)
+        $border-width * 2
+      );
+      min-height: $image-wh - $body-padding * 2;
+      border: $border-width solid $color-gray;
+    }
+  }
+  .meta {
+    margin: 0 20px 10px 20px;
+    text-align: right;
+  }
+}
+@mixin post-detail {
+  border: solid 1px #CCCCCC;
+  margin: 0 0 50px 0;
+
+  .title {
+    margin: 20px 0 20px 20px;
+  }
+
+  .main {
+    overflow: hidden;
+    margin: 0 20px 20px 20px;
+
+    .image {
+      float: left;
+      margin: 0 20px 0 0;
+
+      img {
+        width: 400px;
+        height: 400px;
+        padding: 0;
+      }
+    }
+
+    .body {
+      float: left;
+      padding: 10px;
+      min-height: 380px;
+      border: 1px solid #CCC;
+      margin: 0;
+      width: 414px;
+    }
+  }
+}
