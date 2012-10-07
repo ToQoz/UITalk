@@ -10,6 +10,9 @@ class Post < ActiveRecord::Base
 
   attr_accessible :user_id, :title, :body
 
+  validates :title, :presence => true, :length => { :maximum => 100 }
+  validates :body, :presence => true, :length => { :maximum => 1500 }
+
   scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
 
   module ImageMethods
