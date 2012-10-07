@@ -14,6 +14,9 @@ class Post < ActiveRecord::Base
   validates :title, :presence => true, :length => { :maximum => 100 }
   validates :body, :presence => true, :length => { :maximum => 1500 }
 
+  validates :title, :presence => true, :length => { :maximum => 100 }
+  validates :body, :presence => true, :length => { :maximum => 1500 }
+
   scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
 
   before_save :create_tags
