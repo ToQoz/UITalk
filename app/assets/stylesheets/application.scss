@@ -12,66 +12,46 @@
  *= require normalize-rails
  *= require_tree .
  */
+@import "variables";
+
 header {
   overflow: hidden;
-  background: #FAFAFA;
-  background: -moz-linear-gradient(#FAFAFA, #EAEAEA);
-  background: -webkit-linear-gradient(#FAFAFA, #EAEAEA);
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";
+  margin-bottom: 50px;
   border-bottom: 1px solid #CACACA;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4),0 0px 10px rgba(0, 0, 0, 0.1);
+  @include background-gradient(#FAFAFA, #EAEAEA);
 
-  .logo {
-    font-weight: normal;
-    font-size: 2em;
-    float: left;
-    margin: 0;
-    padding: 0;
-    height: 35px;
-  }
-  .logo a {
-    text-decoration: none;
-  }
-  ul.hmenu {
-    float: right;
+  .content {
     overflow: hidden;
-    margin: 0;
-    padding: 0;
-    height: 35px;
-    line-height: 35px;
-    vertical-align: middle;
-    list-style-type: none;
 
-    li {
+    .logo {
       float: left;
-      margin: 0 0 0 10px;
+      @include logo;
+      @include header-content;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    ul.hmenu {
+      float: right;
+      @include horizontal-list;
+      @include header-content;
     }
   }
 }
 
 .content {
-  width: 900px;
+  width: $content-width;
   margin: 0 auto;
 }
 
-#flash_notice {
-  color: blue;
-}
-
-#flash_alert {
-  color: red;
-}
-
 .form {
-  width: 900px;
-  margin: 20px auto;
-
   .required:after {
     content: 'required';
-    color: red;
-    margin-left: 1em;
-    padding: .1em;
-    font-size: .8em;
+    color: $color-red;
+    @include after-note;
   }
 
   .input {
@@ -83,43 +63,32 @@ header {
   }
 
   input[type=submit] {
-    background: url(http://twitter.toqoz.net/images/toqoz.png) no-repeat #F3F3F3;
-    font-size: 12px;
-    font-weight: bold;
-    color: #6E6E6E;
-    padding: 9px 15px 9px 35px;
-    text-shadow: 0 1px 0 white;
-    border: solid 1px gainsboro;
-    -webkit-transition: all 0.518s ease-in-out;
-    -moz-transition: all 0.518s ease-in-out;
-    -ms-transition: all 0.518s ease-in-out;
-    -o-transition: all 0.518s ease-in-out;
-    transition: all 0.518s ease-in-out;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-    border-radius: 2px;
-    margin-right: 5px;
+    @include submit-button(url(http://twitter.toqoz.net/images/toqoz.png));
+    @include transition(all 0.518s ease-in-out);
+    @include border-radius(2px);
   }
   input[type=submit]:hover {
-    border: solid 1px #aeaeae;
-    background: url(http://twitter.toqoz.net/images/toqoz.png) no-repeat #d5d5d5;
+    @include submit-button-hover(url(http://twitter.toqoz.net/images/toqoz.png));
   }
 
   input[type=text], input[type=password], textarea {
-    font-size: 13px;
+    font-size: $font-size-small;
     height: 20px;
     line-height: 20px;
     padding: 4px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -o-border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, .1);
+    @include border-radius(6px);
   }
   textarea {
     height: 50px;
     line-height: 20px;
   }
+}
 
+#flash_notice {
+  color: $color-blue;
+}
+
+#flash_alert {
+  color: $color-red;
 }

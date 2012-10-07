@@ -2,84 +2,69 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "variables";
+
 #page_user_new {
   .page_canvas {
     border: 1px solid rgba(0, 0, 0, .1);
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -o-border-radius: 6px;
-    border-radius: 6px;
     margin: 20px auto 0;
+    @include border-radius(6px);
+  }
+  .form {
+    width: 500px;
   }
 }
 #page_user_show {
+  $top-row-height: 250px;
+  $top-row-margin-bottom: 20px;
+  $left-col-width: 250px;
+
   overflow: hidden;
 
   .title {
-    color: #CCCCCC;
+    color: $color-gray;
+    margin: 0 0 20px 0;
   }
 
+  // right col
   .profile {
-    width: 250px;
+    width: $left-col-width;
     float: left;
 
     .image {
-      width: 250px;
-      height: 250px;
+      width: $left-col-width;
+      height: $top-row-height;
+      margin: 0 0 $top-row-margin-bottom 0;
     }
     .detail {
       dl {
-        div {
-          overflow: hidden;
-          width: 250px;
-          margin: 0 0 10px 0;
-          border-bottom: 1px solid #CCCCCC;
-        }
-        dt {
-          float: left;
-          width: 70px;
-          color: #CCCCCC;
-        }
-        dd {
-        }
+        margin: 0 0 $top-row-margin-bottom 0;
+        @include horizontal-dl(250px);
       }
     }
   }
 
+  // left col
   .graph {
-    height: 250px;
-    margin: 0 0 0 250px;
-    background-color: #CCC;
+    width: $content-width - $left-col-width;
+    height: $top-row-height;
+    line-height: $top-row-height;
+    vertical-align: middle;
+    margin: 0 0 0 $left-col-width;
+    background-color: $color-gray;
 
     // FIXME
     font-size: 60px;
-    line-height: 250px;
-    vertical-align: middle;
     text-align: center;
   }
 
   .latest-post {
-    width: 650px;
-    margin: 0 0 0 250px;
+    width: $content-width - $left-col-width;
+    margin: 0 0 0 $left-col-width;
 
     li {
-      border-bottom: 1px solid #CCCCCC;
+      border-bottom: 1px solid $color-gray;
     }
-
-    .attention {
-      margin: 15px 0;
-      padding: 10px;
-      font-size: 12px;
-      color: #6D6D4B;
-      background: #FFFFDE;
-      border: 1px solid #E4E4C6;
-      border-right-color: #EFF2C7;
-      border-bottom-color: #EFF2C7;
-      border-radius: 3px;
-    }
-  }
-  .form {
-    width: 500px;
   }
 }
 
