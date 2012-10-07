@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
     def image_path
       "#{Rails.root}/public/uploaded/#{self.id.to_s}.png"
     end
-    def set_image(image)
+    def set_image
       File.open("#{image_path}", 'w').print(image.read.force_encoding('utf-8'))
     end
   end
@@ -24,10 +24,20 @@ class Post < ActiveRecord::Base
   include ImageMethods
 
   def self.create_and_set_image(params, image)
-    # TODO Error Handling
-    post = self.new params
-    post.save
-    post.set_image(image)
-    post
+    self.transaction do
+      begin
+        post = self.new params
+        post.save
+        if image
+          post.set_image(image)
+        end
+      rescue => e
+        Rails.logger.error e.message
+        Rails.logger.error e.backtrace.join("\n")
+
+        raise ActiveRecord::Rollback
+      end
+    end
   end
+
 end
