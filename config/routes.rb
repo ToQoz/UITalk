@@ -2,8 +2,6 @@
 
 UITalk::Application.routes.draw do
 
-  root :to => 'posts#index'
-
   # OmniAuth Callback
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
