@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 FactoryGirl.define do
+  factory :tag, class: Tag do |f|
+    f.name "test"
+  end
   factory :name_empty, class: Tag do |f|
     f.name ""
   end

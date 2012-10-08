@@ -28,4 +28,32 @@ describe Post do
       end
     end
   end
+
+  describe '.title' do
+    before do
+      @post = FactoryGirl.build(:post)
+    end
+    context "が未入力の場合はエラー" do
+      before { @post.title="" }
+      it { should_not be_valid }
+    end
+    context "が150文字以上の場合はエラー" do
+      before { @post.title="a" * 151 }
+      it { should_not be_valid }
+    end
+  end
+
+  describe '.body' do
+    before do
+      @post = FactoryGirl.build(:post)
+    end
+    context "が未入力の場合はエラー" do
+      before { @post.body="" }
+      it { should_not be_valid }
+    end
+    context "が150文字以上の場合はエラー" do
+      before { @post.body="a" * 1501 }
+      it { should_not be_valid }
+    end
+  end
 end

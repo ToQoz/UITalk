@@ -17,11 +17,14 @@ class PostsController < ApplicationController
     unless user_signed_in?
       redirect_to root_url, notice: 'you should login'
     else
-      @post = Post.create_and_set_image({
+      @post = Post.new({
         title: params[:post][:title],
         body: params[:post][:body],
-        user_id: current_user.id
-      }, params[:post][:image])
+        user_id: current_user.id,
+        image: params["post"]["image"],
+        tags_str: params["post"]["tags_str"]
+      })
+      @post.save
       respond_with @post
     end
   end
