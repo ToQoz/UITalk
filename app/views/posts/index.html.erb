@@ -4,6 +4,7 @@
       <span class="input required"><%= p.text_field :title, { placeholder: "title" } %></span>
       <span class="input required"><%= p.text_area :body, { placeholder: "body" } %></span>
       <span class="input"><%= p.file_field :image %></span>
+      <span class="input"><%= p.text_field :tags_str %></span>
       <%= p.submit %>
     <% end %>
   </div>
