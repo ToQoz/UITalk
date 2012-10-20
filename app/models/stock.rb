@@ -10,4 +10,5 @@ class Stock < ActiveRecord::Base
   validates :post_id, :presence => true, :uniqueness => true
   validates :user_id, :presence => true
 
+  scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
 end
