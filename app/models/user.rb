@@ -13,6 +13,7 @@
 class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
+  has_many :stocks
 
   has_many :project_members
   has_many :projects, :through => :project_members
