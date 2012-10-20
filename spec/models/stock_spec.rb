@@ -26,4 +26,17 @@ describe Stock do
       stock.should have(1).error_on(:user_id)
     end
   end
+
+  describe '#recent scope' do
+     before do
+      @stock1 = FactoryGirl.create(:stock)
+      @stock2 = FactoryGirl.create(:stock)
+      @stock3 = FactoryGirl.create(:stock)
+    end
+    context 'は、nを渡すと、' do
+      it '新しい順にsortされた投稿をn件含んだ配列を返す' do
+        Stock.recent(2).should == [ @stock3, @stock2 ]
+      end
+    end
+  end
 end
