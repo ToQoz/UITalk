@@ -23,8 +23,7 @@ class User < ActiveRecord::Base
   attr_accessor :profile_image
   attr_accessible :uuid, :name, :email, :provider, :uid, :password, :password_confirmation, :password_digest, :profile_image_filename, :profile_image
 
-  validate :third_party_oauth_valid?
-  validates :uid, uniqueness: { case_sensitive: false }
+  validate :thirdparty_oauth_valid?
   validates :name, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
   validates :email, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
 
@@ -54,7 +53,7 @@ class User < ActiveRecord::Base
 
   # Custom Setter
   def uuid=(value)
-    write_attribute(:uuid, value)
+    write_attribute(:uuid, value) if uuid.nil?
     raise UITalk::EmptyUUID, "uuid `uuid` is empty" if uuid.to_s == ""
     raise UITalk::NotUniqueUUID, "uuid `uuid` is already exists" if User.where(uuid: uuid).count > 0
   end
@@ -190,18 +189,16 @@ class User < ActiveRecord::Base
     provider_list().include? provider
   end
 
-  def third_party_oauth_valid?
-    provider_is_empty = (provider.nil? || provider.length < 0)
-    uid_is_empty = (uid.nil? || uid.length < 0)
+  def thirdparty_oauth_valid?
+    provider_is_empty = (provider.nil? || provider.length <= 0)
+    uid_is_empty = (uid.nil? || uid.length <= 0)
 
-    if !provider_is_empty
-      if !include_by_provider_list?
-        errors.add(:provider, 'providerが不正')
-      elsif uid_is_empty
-        errors.add(:uid, 'uidが空です')
-      end
+    unless provider_is_empty
+      errors.add(:provider, 'providerが不正') if !include_by_provider_list?
+      errors.add(:uid, 'uidが空です') if uid_is_empty
+      errors.add(:uid, 'このuidは既に使われています') if User.where(uid: uid).count > 0
     end
-    if !uid_is_empty
+    unless uid_is_empty
       errors.add(:provider, 'providerが空です') if provider_is_empty
     end
   end

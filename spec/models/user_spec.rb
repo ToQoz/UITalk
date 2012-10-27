@@ -120,8 +120,8 @@ describe User do
     it { should be_true }
   end
 
-  context '画像の保存に失敗した時、' do
-    describe '#save' do
+  describe '#save' do
+    context '画像の保存に失敗した時、' do
       let(:rails_mock) { mock("Rails") }
       let(:logger_mock) { mock("Rails.logger") }
       let(:user) { FactoryGirl.build(:user) }
@@ -136,7 +136,14 @@ describe User do
         lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
       end
     end
-    describe '#save!' do
+  end
+
+  describe '#save!' do
+    context '画像の保存に失敗した時、' do
+      let(:rails_mock) { mock("Rails") }
+      let(:logger_mock) { mock("Rails.logger") }
+      let(:user) { FactoryGirl.build(:user) }
+
       it 'は、ロールバックする。' do
         user = FactoryGirl.build(:user)
         user.stubs(:save_profile_image!).raises
@@ -144,5 +151,16 @@ describe User do
         lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
       end
     end
+  end
+
+  describe '#update_attributes' do
+    let(:user) { FactoryGirl.create(:user) }
+    subject { user }
+    before :all do
+      @old_user_uuid = user.uuid
+      user.update_attributes({ name: "ChangedToQoz" })
+    end
+    its(:uuid) { should eq(@old_user_uuid) }
+    its(:name) { should eq("ChangedToQoz") }
   end
 end
