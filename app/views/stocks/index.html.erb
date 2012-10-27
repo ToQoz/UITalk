@@ -1,0 +1,18 @@
+<div id="stock_index">
+  <div class="stock_set">
+    <% @stocks.each do |s| %>
+    <div class='stock'>
+      <h2 class="title"><%= link_to s.post.title, "/posts/#{s.post.id.to_i}", p %></h2>
+      <div class="main">
+        <p class="body"><%= s.post.body %></p>
+      </div>
+      <div class="meta">
+        <span class="user_name">DummyToQoz</span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div id="account_ctrl_panel">
+  </div>
+</div>

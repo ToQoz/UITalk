@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
 
   validates :title, :presence => true, :length => { :maximum => 100 }
   validates :body, :presence => true, :length => { :maximum => 1500 }
+  validates_format_of :tags_str, :with => /^[ -~｡-ﾟ]*$/, :message => "Tag cant'be full-width characters"
 
   scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
 

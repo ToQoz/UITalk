@@ -24,8 +24,12 @@ class PostsController < ApplicationController
         image: params["post"]["image"],
         tags_str: params["post"]["tags_str"]
       })
-      @post.save
-      respond_with @post
+      if @post.save
+        redirect_to root_url, notice: 'post complete'
+      else
+        @posts = Post.recent(40)
+        render :template => "posts/index", :locals => {:posts => @posts}
+      end
     end
   end
 end
