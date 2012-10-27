@@ -195,8 +195,11 @@ class User < ActiveRecord::Base
 
     unless provider_is_empty
       errors.add(:provider, 'providerが不正') if !include_by_provider_list?
-      errors.add(:uid, 'uidが空です') if uid_is_empty
-      errors.add(:uid, 'このuidは既に使われています') if User.where(uid: uid).count > 0
+      if uid_is_empty
+        errors.add(:uid, 'uidが空です')
+      else
+        errors.add(:uid, 'このuidは既に使われています') if User.where(uid: uid).count > 0
+      end
     end
     unless uid_is_empty
       errors.add(:provider, 'providerが空です') if provider_is_empty
