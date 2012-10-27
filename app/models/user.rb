@@ -28,32 +28,33 @@ class User < ActiveRecord::Base
 
   scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
   scope :thirdparty_auth_data_is, lambda { |auth| where(provider: auth[:provider], uid: auth[:uid]) }
+  before_save :set_uuid, :set_image
 
-  around_save :around_save
+  def set_uuid
+    begin
+      self.uuid = generate_uuid
+    rescue => e
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace.join("\n")
+      false
+    end
+  end
 
-  def around_save
-    self.transaction do
-      begin
-        self.uuid = generate_uuid
-        raise UITalk::NotValidUUID, "uuid should not be blank" if self.uuid.to_s == ""
-
-        save_profile_image!
-
-        yield
-      rescue => e
-        Rails.logger.error e.message
-        Rails.logger.error e.backtrace.join("\n")
-
-        raise ActiveRecord::Rollback
-      end
+  def set_image
+    begin
+      save_profile_image!
+    rescue => e
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace.join("\n")
+      false
     end
   end
 
   # Custom Setter
   def uuid=(value)
     write_attribute(:uuid, value)
-    # raise if same uuid user already exists
-    raise UITalk::NotUniqueUUID, "uuid is already exists" unless User.where(uuid: self.uuid).count == 0
+    raise UITalk::EmptyUUID, "uuid `uuid` is empty" if uuid.to_s == ""
+    raise UITalk::NotUniqueUUID, "uuid `uuid` is already exists" if User.where(uuid: uuid).count > 0
   end
 
   # Custom Setter/Getter

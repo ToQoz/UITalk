@@ -132,16 +132,11 @@ describe User do
       end
 
       it 'は、ロールバックする。' do
-        user.save.should eq(nil)
+        user.save.should eq(false)
         lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
       end
-
-      it 'logger#errorが、呼ばれる。' do
-        user.save
-        rails_mock.logger.expects(:error)
-      end
     end
-    describe '#save' do
+    describe '#save!' do
       it 'は、ロールバックする。' do
         user = FactoryGirl.build(:user)
         user.stubs(:save_profile_image!).raises
