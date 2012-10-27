@@ -7,7 +7,7 @@ describe UsersController do
     User.any_instance.stubs(:save_profile_image!)
   end
 
-  let (:user) { FactoryGirl.build :user }
+  let(:user) { FactoryGirl.build :user }
 
   describe :Routing do
     describe "GET /users" do
@@ -31,7 +31,7 @@ describe UsersController do
     end
   end
 
-  describe 'UsersController#index' do
+  describe '#index' do
     before :each do
       User.stubs(:limit).returns([ user ])
     end
@@ -42,7 +42,7 @@ describe UsersController do
     end
   end
 
-  describe 'UsersController#show' do
+  describe '#show' do
     before :each do
       User.stubs(:name_is).with(user.to_param).returns([ user ])
     end
@@ -53,7 +53,7 @@ describe UsersController do
     end
   end
 
-  describe 'UsersController#new' do
+  describe '#new' do
     it 'は、Userモデルにnewメッセージを { name: oauthのニックネーム } というパラメータと一緒に送る。' do
       session[:oauth_nickname] = "ToQoz"
       User.expects(:new).with(name: "ToQoz")
@@ -67,7 +67,7 @@ describe UsersController do
     end
   end
 
-  describe 'UsersController#create' do
+  describe '#create' do
     before(:each) { User.stubs new: user }
 
     it 'は、Userモデルにnewメッセージを送る。' do
@@ -100,16 +100,43 @@ describe UsersController do
     end
   end
 
-  describe 'UsersController#update' do
-    let (:user) { FactoryGirl.create :user }
-    it 'Userモデルにupdate_attributeメッセージを送る' do
-      controller.class.skip_before_filter :correct_user?    
-      controller.class.skip_before_filter :authenticate_user!
+  describe '#update' do
+    let(:user) { FactoryGirl.create :user }
+    let(:attr) { { "name" => "saint_kenji" } }
 
-      attr = { "name" => "saint_kenji" }
+    before :each do
+      controller.class.skip_before_filter :correct_user?
+      controller.class.skip_before_filter :authenticate_user!
       User.stubs(:name_is).with(user.to_param).returns([ user ])
+    end
+
+    it 'は、Userモデルにupdate_attributeメッセージを送る' do
       user.expects(:update_attributes).with(attr)
       put :update, :id => user.to_param, :user => attr
-    end 
+    end
+
+    context 'は、updateに成功した時、' do
+      before :all do
+        user.stubs(:update_attributes).returns(true)
+      end
+
+      it 'ユーザーページにリダイレクトする。' do
+        put :update, :id => user.to_param, :user => attr
+        response.should redirect_to(action: "show", id: user.to_param)
+      end
+    end
+
+    context 'は、updateに失敗した時、' do
+      before :all do
+        user.stubs(:update_attributes).returns(false)
+      end
+      it '編集画面を表示する。' do
+        put :update, :id => user.to_param, :user => attr
+        response.should render_template(:edit)
+      end
+    end
+  end
+
+  describe '#edit' do
   end
 end

@@ -49,7 +49,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.3.3)
+    coffee-script-source (1.4.0)
     coolline (0.3.0)
     cucumber (1.2.1)
       builder (>= 2.1.2)
@@ -207,7 +207,7 @@ GEM
     treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
-    twitter (4.1.0)
+    twitter (4.1.2)
       faraday (~> 0.8)
       multi_json (~> 1.3)
       simple_oauth (~> 0.1.6)
