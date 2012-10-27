@@ -12,6 +12,7 @@
 # t.string   "uuid"
 
 class User < ActiveRecord::Base
+  # Association
   has_many :posts
   has_many :comments
   has_many :stocks
@@ -19,14 +20,17 @@ class User < ActiveRecord::Base
   has_many :project_members
   has_many :projects, through: :project_members
 
+  # Attributes
   has_secure_password
   attr_accessor :profile_image
   attr_accessible :uuid, :name, :email, :provider, :uid, :password, :password_confirmation, :password_digest, :profile_image_filename, :profile_image
 
+  # Validation
   validate :thirdparty_oauth_valid?
   validates :name, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
   validates :email, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
 
+  # Scope
   scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
   scope :thirdparty_auth_data_is, lambda { |auth| where(provider: auth[:provider], uid: auth[:uid]) }
   before_save :set_uuid, :set_image
@@ -69,7 +73,7 @@ class User < ActiveRecord::Base
         raise UITalk::Error, "uuid is blank" if uuid.to_s == ""
 
         dir = "public/uploaded/#{self.class.to_s.underscore}/#{uuid}"
-        dir_expanded_path = File.expand_path dir
+        dir_expanded_path = Pathname.new File.expand_path(dir)
 
         FileUtils.mkdir_p(dir_expanded_path) unless File.exists?(dir_expanded_path)
         dir
@@ -105,23 +109,23 @@ class User < ActiveRecord::Base
 
     module Ext
       def profile_image_ext
-        return default_profile_image_ext unless [ 'image/png', 'image/jpg', 'image/jpeg', 'image/gif' ].map { |t| profile_image.content_type === t }.include? true
+        return default_profile_image_ext unless [ 'image/png', 'image/jpg', 'image/jpeg', 'image/gif' ].include?(profile_image.content_type)
         profile_image.content_type.gsub(/^image\//, "")
       end
 
       def default_profile_image_ext
-        profile_default_image_path.split('.').last
+        profile_default_image_path.extname
       end
     end
     include Ext
 
     module Path
       def profile_image_path
-        "#{Rails.root}/#{profile_image_dir}/#{profile_image_filename}"
+        Rails.root.join(profile_image_dir).join(profile_image_filename)
       end
 
       def profile_default_image_path
-        "#{Rails.root}/public/defaults/user.png"
+        Rails.root.join("public/defaults/user.png")
       end
     end
     include Path
