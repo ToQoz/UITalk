@@ -6,9 +6,10 @@
 # t.string   "email"
 # t.datetime "created_at",                   :null => false
 # t.datetime "updated_at",                   :null => false
-# t.string   "image",      :default => ""
+# t.string   "profile_image_filenameimage",  :default => ""
 # t.boolean  "available",  :default => true
 # t.string   "password_digest"
+# t.string   "uuid"
 
 class User < ActiveRecord::Base
   has_many :posts
@@ -16,16 +17,16 @@ class User < ActiveRecord::Base
   has_many :stocks
 
   has_many :project_members
-  has_many :projects, :through => :project_members
+  has_many :projects, through: :project_members
 
   has_secure_password
   attr_accessor :profile_image
   attr_accessible :uuid, :name, :email, :provider, :uid, :password, :password_confirmation, :password_digest, :profile_image_filename, :profile_image
 
   validate :third_party_oauth_valid?
-  validates :uid, :uniqueness => { :case_sensitive => false }
-  validates :name, :presence => { :mesage => 'は、必須です' }, :uniqueness => { :case_sensitive => false, :message => 'は、既に登録されています' }
-  validates :email, :presence => { :mesage => 'は、必須です' }, :uniqueness => { :case_sensitive => false, :message => 'は、既に登録されています' }
+  validates :uid, uniqueness: { case_sensitive: false }
+  validates :name, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
+  validates :email, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
 
   scope :name_is, lambda { |name| where(["lower(name) = ?", name.downcase]) }
   scope :thirdparty_auth_data_is, lambda { |auth| where(provider: auth[:provider], uid: auth[:uid]) }

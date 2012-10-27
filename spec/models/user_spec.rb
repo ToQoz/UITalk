@@ -122,9 +122,9 @@ describe User do
 
   context '画像の保存に失敗した時、' do
     describe '#save' do
-      let (:rails_mock) { mock("Rails") }
-      let (:logger_mock) { mock("Rails.logger") }
-      let (:user) { FactoryGirl.build(:user) }
+      let(:rails_mock) { mock("Rails") }
+      let(:logger_mock) { mock("Rails.logger") }
+      let(:user) { FactoryGirl.build(:user) }
 
       before :all do
         user.stubs(:save_profile_image!).raises
