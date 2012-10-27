@@ -7,6 +7,8 @@ gem 'rails', '3.2.6'
 
 gem 'sqlite3'
 gem 'mysql2'
+gem 'redis'
+gem 'hiredis'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,6 +28,7 @@ gem "omniauth-twitter"
 gem "twitter"
 gem 'bcrypt-ruby'
 gem 'uuidtools'
+gem 'strong_parameters'
 
 group :development do
   gem 'rails-erd'

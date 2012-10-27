@@ -45,6 +45,7 @@ Thumbs.db
 /coverage
 /db/*.sqlite3-journal
 /patchs/*
+/.zeus.sock
 
 !.gitkeep
 # }}}
