@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 
-class CommentsController < ApplicationController
+class StocksController < ApplicationController
   respond_to :html, :json
 
   # allow from login user
   before_filter :authenticate_user!, only: [ :create,  :destroy ]
+
+  def index
+    @user = User.find_by_name(params[:user_id])
+    if @user
+      @stocks = Stock.for_user(@user.id).recent(40)
+    else
+      #TODO error page
+      redirect_to root_url, notice: 'not found user'
+    end
+  end
 
   def create
     @stock = Stock.new({
