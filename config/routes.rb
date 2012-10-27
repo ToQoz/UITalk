@@ -18,7 +18,9 @@ UITalk::Application.routes.draw do
   resources :posts do
     resources :comments
   end
-  resources :users
+  resources :users do
+    resources :stocks
+  end
   resources :home, :only => [ :index ]
 
   root :to => 'posts#index'
