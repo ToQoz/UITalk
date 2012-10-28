@@ -138,5 +138,13 @@ describe UsersController do
   end
 
   describe '#edit' do
+    let(:user) { FactoryGirl.build :user }
+    it 'は、編集対象のUserをassignする。' do
+      controller.class.skip_before_filter :correct_user?
+      controller.class.skip_before_filter :authenticate_user!
+      User.stubs(:name_is).with(user.to_param).returns([ user ])
+      get :edit, { id: user.to_param }
+      assigns(:user).should eq(user)
+    end
   end
 end

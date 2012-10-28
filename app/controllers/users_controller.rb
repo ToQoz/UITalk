@@ -36,6 +36,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.name_is(params[:id]).first
+    respond_with @user
   end
 
   def update
