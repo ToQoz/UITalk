@@ -75,9 +75,3 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
-
-  # if ENV['DRB']
-  #   use_simplecov if ENV['COVERAGE'] == 'on'
-  # end
-  # require 'factory_girl'
-  # FactoryGirl.reload
