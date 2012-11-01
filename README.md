@@ -13,7 +13,7 @@ $ cp config/initializers/secret_token.rb.sample config/initializers/secret_token
 $ vi config/initializers/secret_token.rb
 
 $ bundle install --path=vendor/bundles
-$ DB=sqlite bundle exec rake db:migrate
+$ bundle exec rake db:migrate
 
 # spec for environments
 $ bundle exec rspec spec/env/*_spec.rb
