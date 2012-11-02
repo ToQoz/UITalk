@@ -28,7 +28,7 @@ $ bundle exec rails s
 
 **Wiki**
 
-+ https://github.com/ToQoz/UITalk/issues
++ https://github.com/ToQoz/UITalk/wiki
 
 **Issues**
 
