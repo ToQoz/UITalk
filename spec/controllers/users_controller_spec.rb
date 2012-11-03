@@ -8,6 +8,9 @@ describe UsersController do
   end
 
   let(:user) { FactoryGirl.build :user }
+  before(:each) do
+    user.avatar = File.open(Rails.root.join('spec/factories/files/avatar.jpg'))
+  end
 
   describe :Routing do
     describe "GET /users" do

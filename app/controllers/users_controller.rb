@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new params[:user]
     @user[:uid] = session[:oauth_uid]
     @user[:provider] = session[:oauth_provider]
-    @user.avatar = params[:user][:avatar]
+    @user.avatar = params[:user][:avatar] if params[:user]
     if @user.save
       session[:user_id] = @user.id
     end

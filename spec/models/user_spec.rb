@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 describe User do
-  before :each do
-    User.any_instance.stubs(:save_profile_image!)
-  end
+  # before :each do
+  #   User.any_instance.stubs(:save_profile_image!)
+  # end
 
   # TODO omniauthからの値のテストも必要あり
   describe '.name' do
