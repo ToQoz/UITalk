@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   attr_accessible :uuid, :name, :email, :provider, :uid, :password, :password_confirmation, :password_digest, :avatar
 
   # Validation
-  validate :thirdparty_oauth_valid?
+  validate :validate_thirdparty_oauth_data
   validates :name, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
   validates :email, presence: { mesage: 'は、必須です' }, uniqueness: { case_sensitive: false, message: 'は、既に登録されています' }
 
@@ -107,20 +107,15 @@ class User < ActiveRecord::Base
     provider_list().include? provider
   end
 
-  def thirdparty_oauth_valid?
+  def validate_thirdparty_oauth_data
     provider_is_empty = (provider.nil? || provider.length <= 0)
     uid_is_empty = (uid.nil? || uid.length <= 0)
 
-    unless provider_is_empty
-      errors.add(:provider, 'providerが不正') if !include_by_provider_list?
-      if uid_is_empty
-        errors.add(:uid, 'uidが空です')
-      else
-        errors.add(:uid, 'このuidは既に使われています') if User.where(uid: uid).count > 0
-      end
-    end
-    unless uid_is_empty
-      errors.add(:provider, 'providerが空です') if provider_is_empty
-    end
+    return if provider_is_empty && uid_is_empty
+
+    return errors.add(:provider, 'providerが不正') if !include_by_provider_list?
+    return errors.add(:provider, 'providerが空です') if provider_is_empty
+    return errors.add(:uid, 'uidが空です') if uid_is_empty
+    return errors.add(:uid, 'このuidは既に使われています') if User.where(uid: uid).count > 0
   end
 end
