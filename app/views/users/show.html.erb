@@ -2,7 +2,7 @@
   <h2 class="title">User Profile</h2>
   <div class="profile">
     <div class="image">
-      <%= image_tag(@user.profile_image_url, width: 250, height: 250) %>
+      <%= image_tag(@user.avatar.url, width: 250, height: 250) %>
     </div>
     <div class="detail">
       <dl>
@@ -27,7 +27,7 @@
           <li>
             <h3 class="title"><%= link_to(p.title, p) %></h3>
             <div class="body"><%= p.body %></div>
-          </li> 
+          </li>
         <%- end -%>
       <%- else -%>
         <p class="attention">hoge doesn’t have any public post</p>
