@@ -29,6 +29,7 @@ gem "twitter"
 gem 'bcrypt-ruby'
 gem 'uuidtools'
 gem 'strong_parameters'
+gem 'carrierwave'
 
 group :development do
   gem 'rails-erd'

@@ -120,38 +120,38 @@ describe User do
     it { should be_true }
   end
 
-  describe '#save' do
-    context '画像の保存に失敗した時、' do
-      let(:rails_mock) { mock("Rails") }
-      let(:logger_mock) { mock("Rails.logger") }
-      let(:user) { FactoryGirl.build(:user) }
+  # describe '#save' do
+  #   context '画像の保存に失敗した時、' do
+  #     let(:rails_mock) { mock("Rails") }
+  #     let(:logger_mock) { mock("Rails.logger") }
+  #     let(:user) { FactoryGirl.build(:user) }
 
-      before :all do
-        user.stubs(:save_profile_image!).raises
-        rails_mock.stubs(:logger).returns(logger_mock)
-      end
+  #     before :all do
+  #       user.stubs(:save_profile_image!).raises
+  #       rails_mock.stubs(:logger).returns(logger_mock)
+  #     end
 
-      it 'は、ロールバックする。' do
-        user.save.should eq(false)
-        lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
-      end
-    end
-  end
+  #     it 'は、ロールバックする。' do
+  #       user.save.should eq(false)
+  #       lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+  #     end
+  #   end
+  # end
 
-  describe '#save!' do
-    context '画像の保存に失敗した時、' do
-      let(:rails_mock) { mock("Rails") }
-      let(:logger_mock) { mock("Rails.logger") }
-      let(:user) { FactoryGirl.build(:user) }
+  # describe '#save!' do
+  #   context '画像の保存に失敗した時、' do
+  #     let(:rails_mock) { mock("Rails") }
+  #     let(:logger_mock) { mock("Rails.logger") }
+  #     let(:user) { FactoryGirl.build(:user) }
 
-      it 'は、ロールバックする。' do
-        user = FactoryGirl.build(:user)
-        user.stubs(:save_profile_image!).raises
-        lambda { user.save! }.should raise_error(ActiveRecord::RecordNotSaved)
-        lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
-      end
-    end
-  end
+  #     it 'は、ロールバックする。' do
+  #       user = FactoryGirl.build(:user)
+  #       user.stubs(:save_profile_image!).raises
+  #       lambda { user.save! }.should raise_error(ActiveRecord::RecordNotSaved)
+  #       lambda { User.find(user.id) }.should raise_error(ActiveRecord::RecordNotFound)
+  #     end
+  #   end
+  # end
 
   describe '#update_attributes' do
     let(:user) { FactoryGirl.create(:user) }
