@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RelationshipBuilder do
+describe Followable do
   let(:user) { FactoryGirl.create(:user) }
   let(:target_user) { FactoryGirl.create(:user) }
 

@@ -9,7 +9,7 @@ class UnfollowContext
 
   def initialize(user, target_user)
     @user, @target_user = user, target_user
-    @user.extend RelationshipBuilder
+    @user.extend Followable
   end
 
   def call

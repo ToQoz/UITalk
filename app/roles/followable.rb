@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-module RelationshipBuilder
+module Followable
   def following?(target)
     self.relationships.find_by_following_id(target.id)
   end
