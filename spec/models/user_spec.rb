@@ -175,37 +175,15 @@ describe User do
     it "should have a followings method" do
       @user.should respond_to(:followings)
     end
-    it "should have a following? method" do
-      @user.should respond_to(:following?)
-    end
-    it "should have a follow! method" do
-      @user.should respond_to(:follow!)
-    end
-    it "should follow another user" do
-      @user.follow!(@following)
-      @user.should be_following(@following)
-    end
-    it "should include the following user in the following array" do
-      @user.follow!(@following)
-      @user.followings.should include(@following)
-    end
-    it "should have an unfollow! method" do
-      @user.should respond_to(:unfollow!)
-    end
-    it "should unfollow a user" do
-      @user.follow!(@following)
-      @user.unfollow!(@following)
-      @user.should_not be_following(@following)
-    end
     it "should have a reverse_relationships method" do
       @user.should respond_to(:reverse_relationships)
     end
     it "should have a followers method" do
       @user.should respond_to(:followers)
     end
-    it "should include the follower in the followers array" do
-      @user.follow!(@following)
-      @following.followers.should include(@user)
-    end
+    # it "should include the follower in the followers array" do
+    #   @user.follow!(@following)
+    #   @following.followers.should include(@user)
+    # end
   end
 end
