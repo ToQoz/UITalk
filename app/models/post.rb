@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
   has_many :tags, :through => :posts_tags
   has_many :stocks
 
+  belongs_to :user
+
   accepts_nested_attributes_for :comments
 
   attr_accessor :image, :tags_str
