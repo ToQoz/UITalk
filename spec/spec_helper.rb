@@ -4,6 +4,8 @@ def use_simplecov
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
   SimpleCov.start 'rails' do
     add_group "Controllers", "app/controllers"
+    add_group "Roles", "app/contexts"
+    add_group "Contexts", "app/roles"
     add_group "Models", "app/models"
     add_filter "vendor/"
   end

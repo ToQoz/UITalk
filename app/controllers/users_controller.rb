@@ -50,14 +50,20 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @user = User.find_by_name(params[:id])
-    @users = @user.followings
+    @users = User.find_by_name(params[:id]).followings
     render :show_follow
   end
 
   def followers
-    @user = User.find_by_name(params[:id])
-    @users = @user.followers
+    @users = User.find_by_name(params[:id]).followers
     render :show_follow
+  end
+
+  def follow
+    FollowContext.call(current_user, User.find_by_name(params[:id]))
+  end
+
+  def unfollow
+    UnfollowContext.call(current_user, User.find_by_name(params[:id]))
   end
 end
