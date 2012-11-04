@@ -20,9 +20,12 @@ UITalk::Application.routes.draw do
   end
   resources :users do
     resources :stocks
+    member do
+      get :followings, :followers
+    end
   end
   resources :home, :only => [ :index ]
-
+  resources :relationships, :only => [:create, :destroy]
   root :to => 'posts#index'
 
   # The priority is based upon order of creation:
