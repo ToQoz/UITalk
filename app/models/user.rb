@@ -20,7 +20,10 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :stocks
-  has_many :relationships
+  has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
+  has_many :followings, :through => :relationships, :source => :following
+  has_many :reverse_relationships, :foreign_key => "following_id", :class_name => "Relationship", :dependent => :destroy
+  has_many :followers, :through => :reverse_relationships, :source => :follower
 
   has_many :project_members
   has_many :projects, through: :project_members
@@ -100,6 +103,18 @@ class User < ActiveRecord::Base
       end
       user
     end
+  end
+
+  def following?(following)
+    relationships.find_by_following_id(following)
+  end
+
+  def follow!(following)
+    relationships.create!(:following_id => following.id)
+  end
+
+  def unfollow!(following)
+    relationships.find_by_following_id(following).destroy
   end
 
   private

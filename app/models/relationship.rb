@@ -1,6 +1,11 @@
+# -*- coding: utf-8 -*-
+
 class Relationship < ActiveRecord::Base
+  attr_accessible :following_id
 
-  belongs_to :user
+  belongs_to :following, :class_name => "User"
+  belongs_to :follower, :class_name => "User"
 
-  attr_accessible :follower_id, :following_id
+  validates :following_id, :presence => true
+  validates :follower_id, :presence => true
 end
