@@ -58,4 +58,12 @@ class UsersController < ApplicationController
     @users = User.find_by_name(params[:id]).followers
     render :show_follow
   end
+
+  def follow
+    FollowContext.call(current_user, User.find_by_name(params[:id]))
+  end
+
+  def unfollow
+    UnfollowContext.call(current_user, User.find_by_name(params[:id]))
+  end
 end
