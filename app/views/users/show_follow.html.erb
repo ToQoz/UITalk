@@ -1,0 +1,12 @@
+<div id="followers_index">
+  <div class="followers_set">
+    <% @users.each do |u| %>
+    <div class='follower'>
+      <h2 class="user_name"><%= link_to u.name, "/users/#{u.name.to_s}", p %></h2>
+    </div>
+    <% end %>
+  </div>
+
+  <div id="account_ctrl_panel">
+  </div>
+</div>

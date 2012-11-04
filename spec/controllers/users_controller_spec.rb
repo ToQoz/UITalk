@@ -32,6 +32,16 @@ describe UsersController do
       subject { { :get => "/accounts/signup" } }
       it { should route_to(controller: "users", action: "new") }
     end
+
+    describe "GET /users/:id/followings" do
+      subject { { :get => "/users/ToQoz/followings" } }
+      it { should route_to(controller: "users", action: "followings", id: "ToQoz") }
+    end
+
+    describe "GET /users/:id/followers" do
+      subject { { :get => "/users/ToQoz/followers" } }
+      it { should route_to(controller: "users", action: "followers", id: "ToQoz") }
+    end
   end
 
   describe '#index' do
