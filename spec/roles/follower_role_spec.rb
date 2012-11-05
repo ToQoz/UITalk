@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Followable do
+describe FollowerRole do
   let(:user) { FactoryGirl.create(:user) }
   let(:target_user) { FactoryGirl.create(:user) }
 
@@ -18,8 +18,11 @@ describe Followable do
         user.follow! target_user
       end
       it { user.should be_following(target_user) }
-      it 'should not include user in target_user#followers' do
+      it 'should include user in target_user.followers' do
         target_user.followers.should include(user)
+      end
+      it 'should include user in target_user.followerings' do
+        user.followings.should include(target_user)
       end
     end
   end
@@ -32,7 +35,10 @@ describe Followable do
         user.unfollow!(target_user)
       end
       it { user.should_not be_following(target_user) }
-      it 'should include target user in user.followings' do
+      it 'should not include user in target_user.followerings' do
+        user.followings.should_not include(target_user)
+      end
+      it 'should not include target user in user.followings' do
         user.followings.should_not include(target_user)
       end
     end
