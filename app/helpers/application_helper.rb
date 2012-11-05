@@ -10,10 +10,10 @@ module ApplicationHelper
           html << "\t\t<h5>There was a problem creating the #{object.class.name.humanize.downcase}</h5>\n"
         else
           html << "\t\t<h5>There was a problem updating the #{object.class.name.humanize.downcase}</h5>\n"
-        end    
+        end
       else
         html << "<h5>#{message}</h5>"
-      end  
+      end
       html << "\t\t<ul>\n"
       object.errors.full_messages.each do |error|
         html << "\t\t\t<li>#{error}</li>\n"
