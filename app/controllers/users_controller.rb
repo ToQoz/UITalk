@@ -50,12 +50,16 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @users = User.find_by_name(params[:id]).followings
+    users = User.find_by_name(params[:id])
+    users.extend FollowerRole
+    @users = users.followings
     render :show_follow
   end
 
   def followers
-    @users = User.find_by_name(params[:id]).followers
+    users = User.find_by_name(params[:id])
+    users.extend FollowingRole
+    @users = users.followers
     render :show_follow
   end
 

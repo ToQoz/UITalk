@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 class UnfollowContext
-  attr_reader :user, :target_user
+  attr_reader :follower, :following
 
-  def self.call(user, target_user)
-    self.new(user, target_user).call
+  def self.call(follower, following)
+    self.new(follower, following).call
   end
 
-  def initialize(user, target_user)
-    @user, @target_user = user, target_user
-    @user.extend FollowerRole
+  def initialize(follower, following)
+    @follower, @following = follower, following
+    @follower.extend FollowerRole
   end
 
   def call
-    @user.unfollow!(@target_user)
+    @follower.unfollow!(@following)
   end
 end

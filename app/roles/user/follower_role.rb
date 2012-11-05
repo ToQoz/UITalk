@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 module FollowerRole
-  def self.extended(mod)
-    mod.class_eval do
+  def self.extended(base)
+    base.class_eval do
       attr_accessor :relationships
     end
-    mod.relationships = Relationship.where(follower_id: mod.id)
+    base.relationships = Relationship.where(follower_id: base.id)
   end
 
   def followings

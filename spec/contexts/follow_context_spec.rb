@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe FollowContext do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:target_user) { FactoryGirl.create(:user) }
+  let(:follower) { FactoryGirl.create(:user) }
+  let(:following) { FactoryGirl.create(:user) }
 
-  it 'follow target user for user' do
-    context = described_class.new(user, target_user)
-    context.user.expects(:follow!).with(context.target_user)
+  it 'follow following for follower' do
+    context = described_class.new(follower, following)
+    context.follower.expects(:follow!).with(context.following)
     context.call
   end
 end

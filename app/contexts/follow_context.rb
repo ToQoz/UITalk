@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 class FollowContext
-  attr_reader :user, :target_user, :followings
+  attr_reader :follower, :following, :followings
 
-  def self.call(user, target_user)
-    self.new(user, target_user).call
+  def self.call(follower, following)
+    self.new(follower, following).call
   end
 
-  def initialize(user, target_user)
-    @user, @target_user = user, target_user
-    @user.extend FollowerRole
+  def initialize(follower, following)
+    @follower, @following = follower, following
+    @follower.extend FollowerRole
   end
 
   def call
-    @user.follow!(@target_user)
+    @follower.follow! @following
   end
 end
