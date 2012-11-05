@@ -9,7 +9,7 @@ class FollowContext
 
   def initialize(user, target_user)
     @user, @target_user = user, target_user
-    @user.extend Followable
+    @user.extend FollowerRole
   end
 
   def call
