@@ -4,11 +4,9 @@ require 'spec_helper'
 
 describe Relationship do
   before(:each) do
-    @follower = FactoryGirl.create(:user)
-    @following = FactoryGirl.create(:user)
-    @follower.extend FollowerRole
-    @following.extend FollowingRole
-    @relationship = @follower.relationships.build(:following_id => @following.id)
+    @following = FactoryGirl.create(:following)
+    @follower = FactoryGirl.create(:follower)
+    @relationship = FactoryGirl.build(:relationship, { following_id: @following.id, follower_id: @follower.id })
   end
   it "should create a new instance given valid attributes" do
     @relationship.save!
@@ -29,6 +27,7 @@ describe Relationship do
     end
     it "should have the right following user" do
       @relationship.following.should == @following
+
     end
   end
 
