@@ -163,27 +163,4 @@ describe User do
     its(:uuid) { should eq(@old_user_uuid) }
     its(:name) { should eq("ChangedToQoz") }
   end
-
-  describe ".relationships" do
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-      @following = FactoryGirl.create(:user)
-    end
-    it "should have a relationships method" do
-      @user.should respond_to(:relationships)
-    end
-    it "should have a followings method" do
-      @user.should respond_to(:followings)
-    end
-    it "should have a reverse_relationships method" do
-      @user.should respond_to(:reverse_relationships)
-    end
-    it "should have a followers method" do
-      @user.should respond_to(:followers)
-    end
-    # it "should include the follower in the followers array" do
-    #   @user.follow!(@following)
-    #   @following.followers.should include(@user)
-    # end
-  end
 end

@@ -6,6 +6,8 @@ describe Relationship do
   before(:each) do
     @follower = FactoryGirl.create(:user)
     @following = FactoryGirl.create(:user)
+    @follower.extend FollowerRole
+    @following.extend FollowingRole
     @relationship = @follower.relationships.build(:following_id => @following.id)
   end
   it "should create a new instance given valid attributes" do

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class FollowContext
-  attr_reader :user, :target_user
+  attr_reader :user, :target_user, :followings
 
   def self.call(user, target_user)
     self.new(user, target_user).call

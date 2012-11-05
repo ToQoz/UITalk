@@ -20,10 +20,6 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :stocks
-  has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
-  has_many :followings, :through => :relationships, :source => :following
-  has_many :reverse_relationships, :foreign_key => "following_id", :class_name => "Relationship", :dependent => :destroy
-  has_many :followers, :through => :reverse_relationships, :source => :follower
 
   has_many :project_members
   has_many :projects, through: :project_members
