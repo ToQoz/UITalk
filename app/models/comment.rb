@@ -16,4 +16,8 @@ class Comment < ActiveRecord::Base
   def created_name(user_id)
     User.find_by_id(user_id).name
   end
+
+  def editable_by?(comment_user_id, login_user_id)
+    comment_user_id == login_user_id
+  end
 end

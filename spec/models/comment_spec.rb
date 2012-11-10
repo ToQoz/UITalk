@@ -27,7 +27,16 @@ describe Comment do
     context 'は、ユーザIDが渡された場合、' do
       before { @created_name = comment.created_name(comment.user_id) }
       it 'そのユーザの名前を返す。' do
-       @created_name.should eq(user.name)
+        @created_name.should eq(user.name)
+      end
+    end
+  end
+
+  describe "#editable_by?" do
+    context 'は、コメントしたユーザIDとログインしたユーザIDが渡された場合、' do
+      before { @editable = comment.editable_by?(comment.user_id, user.id) }
+      it '等しい場合、trueを返す' do
+        @editable.should be_true
       end
     end
   end
