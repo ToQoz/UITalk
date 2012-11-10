@@ -19,12 +19,19 @@
     <div class="comment_set">
       <% @post.comments.each do |comment| %>
       <div class='comment'>
-        <p><%= comment.body %></p>
-        <menu>
-          <% if comment.editable_by?(comment.user_id, current_user.id) %>
-          <li><%= link_to "Delete", [@post, comment], :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
-          <% end %>
-        </menu>
+        <div class="main">
+          <p class="body"><%= comment.body %></p>
+        </div>
+        <div class="meta">
+          <span class="user_name"><%= comment.created_name(comment.user_id) %></span>
+        </div>
+        <div class="menu">
+          <ul>
+            <% if comment.editable_by?(comment.user_id, current_user.id) %>
+            <li><%= link_to "Delete", [@post, comment], :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
       <% end %>
     </div>
