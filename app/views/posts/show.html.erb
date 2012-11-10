@@ -23,7 +23,7 @@
           <p class="body"><%= comment.body %></p>
         </div>
         <div class="meta">
-          <span class="user_name"><%= comment.created_name(comment.user_id) %></span>
+          <span class="user_name"><%= link_to comment.created_name(comment.user_id), user_path(comment.user.name) %></span>
         </div>
         <div class="menu">
           <ul>
