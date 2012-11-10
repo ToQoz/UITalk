@@ -16,13 +16,16 @@ UITalk::Application.routes.draw do
   match "accounts/setting", :via => :put, :to => 'users#update'
 
   resources :posts do
-    resources :comments, :only => [:create, :destroy]
+    resources :comments, :only => [ :create ]
   end
   resources :users do
     resources :stocks
     member do
       get :followings, :followers
     end
+  end
+  resources :comments, :only => [ :destroy ] do
+    resources :evaluations, :controller => "comment_evaluations", :only => [:create, :destroy]
   end
   resources :home, :only => [ :index ]
   resources :relationships, :only => [:create, :destroy]
