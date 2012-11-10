@@ -33,11 +33,9 @@ describe Comment do
   end
 
   describe "#editable_by?" do
-    context 'は、コメントしたユーザIDとログインしたユーザIDが渡された場合、' do
+    context 'は、コメントのユーザIDとコメントを作成したユーザIDが等しい場合、' do
       before { @editable = comment.editable_by?(comment.user_id, user.id) }
-      it '等しい場合、trueを返す' do
-        @editable.should be_true
-      end
+      it { @editable.should be_true }
     end
   end
 end
