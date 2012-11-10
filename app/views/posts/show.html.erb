@@ -17,9 +17,14 @@
       <% end %>
     </div>
     <div class="comment_set">
-      <% @post.comments.each do |c| %>
-      <div class='commnet'>
-        <p><%= c.body %></p>
+      <% @post.comments.each do |comment| %>
+      <div class='comment'>
+        <p><%= comment.body %></p>
+        <menu>
+          <% if comment.editable_by?(comment.user_id, current_user.id) %>
+          <li><%= link_to "Delete", [@post, comment], :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
+          <% end %>
+        </menu>
       </div>
       <% end %>
     </div>
