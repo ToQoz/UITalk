@@ -13,4 +13,11 @@ class Comment < ActiveRecord::Base
 
   scope :recent, lambda { |n| order('created_at DESC').limit(n) }
 
+  def created_name(user_id)
+    User.find_by_id(user_id).name
+  end
+
+  def editable_by?(comment_user_id, created_user_id)
+    comment_user_id == created_user_id
+  end
 end

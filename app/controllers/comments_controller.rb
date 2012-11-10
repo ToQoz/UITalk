@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   respond_to :html, :json
 
   # allow from login user
-  before_filter :authenticate_user!, only: [ :create ]
+  before_filter :authenticate_user!, only: [ :create, :destroy ]
 
   def index
     @comments = Comment.recent(40)
@@ -32,4 +32,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+    if @comment.destroy
+      redirect_to @post, notice: 'comment delete complete'
+    else
+      render :template => "posts/show", :locals => {:post => @post}
+    end
+  end
 end
