@@ -13,4 +13,7 @@ class Comment < ActiveRecord::Base
 
   scope :recent, lambda { |n| order('created_at DESC').limit(n) }
 
+  def created_name(user_id)
+    User.find_by_id(user_id).name
+  end
 end
