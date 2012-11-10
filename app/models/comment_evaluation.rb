@@ -12,6 +12,7 @@ class CommentEvaluation < ActiveRecord::Base
   attr_accessible :available, :comment_id, :kind, :user_id
 
   validate :kind_valid?
+  validates :user_id, :presence => true, :uniqueness => { :scope => :comment_id, :message => "has already evaluated for this comment" }
 
   default_scope where(available: true)
   scope :good, where(kind: 1)
