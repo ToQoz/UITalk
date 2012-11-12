@@ -83,4 +83,12 @@ describe CommentEvaluation do
       end
     end
   end
+
+  describe '#evaluable_by?' do
+    context 'コメントIDとユーザIDのデータが存在する場合' do
+      let (:eval) { FactoryGirl.create(:good_kind_comment_eval) }
+      let (:evaluable) { eval.evaluable_by?(eval.comment_id, eval.user_id) }
+      it { evaluable.should be_false }
+    end
+  end
 end

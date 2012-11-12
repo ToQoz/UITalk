@@ -18,5 +18,9 @@ class CommentEvaluation < ActiveRecord::Base
   scope :good, where(kind: 1)
   scope :bad, where(kind: 2)
 
+  def evaluable_by?(comment_id, user_id)
+    CommentEvaluation.find_by_comment_id(comment_id).user_id != user_id
+  end
+
   include Evaluation
 end
