@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class Comment < ActiveRecord::Base
+  has_many :evaluations, :class_name => "CommentEvaluation", :dependent => :destroy
 
   belongs_to :user
   belongs_to :post
