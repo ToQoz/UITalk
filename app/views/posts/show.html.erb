@@ -23,13 +23,15 @@
           <p class="body"><%= comment.body %></p>
         </div>
         <div class="meta">
-          <span class="user_name"><%= comment.created_name(comment.user_id) %></span>
+          <span class="user_name"><%= link_to comment.created_name(comment.user_id), user_path(comment.user.name) %></span>
         </div>
         <div class="menu">
           <ul>
             <% if comment.editable_by?(comment.user_id, current_user.id) %>
-            <li><%= link_to "Delete", [@post, comment], :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
+            <li><%= link_to "Delete", comment_path(:id => comment.id), :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
             <% end %>
+            <li><%= link_to "good", comment_evaluations_path(:comment_id => comment.id, :kind => 1), :method => :post %></li>
+            <li><%= link_to "bad", comment_evaluations_path(:comment_id => comment.id, :kind => 2), :method => :post %></li>
           </ul>
         </div>
       </div>

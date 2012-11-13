@@ -33,8 +33,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
+    @post = Post.find(@comment.post_id)
     if @comment.destroy
       redirect_to @post, notice: 'comment delete complete'
     else
