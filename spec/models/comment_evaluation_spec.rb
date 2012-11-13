@@ -73,4 +73,22 @@ describe CommentEvaluation do
       }
     end
   end
+
+  describe 'validate' do
+    describe '.user_id' do
+      context '重複して評価しようとした時、' do
+        let (:eval) { FactoryGirl.create(:good_kind_comment_eval) }
+        let (:eval2) { FactoryGirl.build(:good_kind_comment_eval, { :user_id => eval.user_id , :comment_id => eval.comment_id}) }
+        it { eval2.should_not be_valid }
+      end
+    end
+  end
+
+  describe '#evaluable_by?' do
+    context 'コメントIDとユーザIDのデータが存在する場合' do
+      let (:eval) { FactoryGirl.create(:good_kind_comment_eval) }
+      let (:evaluable) { eval.evaluable_by?(eval.comment_id, eval.user_id) }
+      it { evaluable.should be_false }
+    end
+  end
 end
