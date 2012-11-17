@@ -9,6 +9,11 @@
       <div class="meta">
         <span class="user_name"><%= link_to s.post.user.name, user_path(s.post.user.name) %></span>
       </div>
+      <div class="menu">
+        <% if s.editable_by?(s.user_id, current_user.id) %>
+        <li><%= link_to "Delete", user_stock_path(:id => s.id), :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
+        <% end %>
+      </div>
     </div>
     <% end %>
   </div>
