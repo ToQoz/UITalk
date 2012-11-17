@@ -27,7 +27,18 @@ class StocksController < ApplicationController
 
   def destroy
     @stock = Stock.find(params[:id])
-    @stock.destroy
-    respond_with @stock
+    @stocks = Stock.for_user(current_user.id).recent(40)
+    check_privilege(@stock)
+    if @stock.delete
+      redirect_to user_stocks_path(:user_id => params[:user_id]), :notice => "Stock deleted"
+    else
+      render :template => "stocks/index", :locals => {:stocks => @stocks}
+    end
+  end
+
+  def check_privilege(stock)
+    if !stock.editable_by?(current_user.id, stock.user_id)
+      raise User::PrivilegeError
+    end
   end
 end
