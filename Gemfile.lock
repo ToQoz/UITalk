@@ -89,6 +89,9 @@ GEM
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libwebsocket (0.1.5)
       addressable
     mail (2.4.4)
@@ -235,6 +238,7 @@ DEPENDENCIES
   hirb
   hiredis
   jquery-rails
+  kaminari
   mysql2
   normalize-rails
   omniauth-twitter
