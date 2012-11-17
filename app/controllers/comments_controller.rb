@@ -35,10 +35,17 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @post = Post.find(@comment.post_id)
+    check_privilege(@comment)
     if @comment.destroy
       redirect_to @post, notice: 'comment delete complete'
     else
       render :template => "posts/show", :locals => {:post => @post}
+    end
+  end
+
+  def check_privilege(comment)
+    if !comment.editable_by?(current_user.id, comment.user_id)
+      raise User::PrivilegeError
     end
   end
 end

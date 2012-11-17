@@ -19,7 +19,7 @@ UITalk::Application.routes.draw do
     resources :comments
   end
   resources :users do
-    resources :stocks
+    resources :stocks, :only => [:index, :destroy ]
     member do
       get :followings, :followers
     end
