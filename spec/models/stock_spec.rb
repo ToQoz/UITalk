@@ -50,4 +50,13 @@ describe Stock do
       end
     end
   end
+
+  describe "#editable_by?" do
+    context 'はユーザIDとストックしたユーザIDが等しい場合trueを返す' do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:stock) { FactoryGirl.create(:stock, { user_id: user.id }) }
+      let(:editable) { stock.editable_by?(user.id, stock.user_id) }
+      it { editable.should be_true }
+    end
+  end
 end
