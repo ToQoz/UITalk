@@ -3,21 +3,27 @@
 require 'spec_helper'
 
 describe Stock do
-  let(:stock) { FactoryGirl.build(:stock) }
-
-  describe '.post_id' do
-    it 'は、空の場合保存しない' do
-      stock.post_id = ""
-      stock.should_not be_valid
-      stock.should have(1).error_on(:post_id)
-    end
+  before :each do
+    User.any_instance.stubs(:save_profile_image!)
   end
 
-  describe '.user_id' do
-    it 'は、空の場合保存しない' do
-      stock.user_id = ""
-      stock.should_not be_valid
-      stock.should have(1).error_on(:user_id)
+  describe 'validate' do
+    describe '.post_id' do
+      context 'が空の場合' do
+        let (:stock) { FactoryGirl.build(:stock, :post_id => nil) }
+        it { stock.should_not be_valid }
+      end
+      context 'が重複して登録された場合' do
+        let (:stock) { FactoryGirl.create(:stock) }
+        let (:stock2) { FactoryGirl.build(:stock, :post_id => stock.post_id) }
+        it { stock2.should_not be_valid }
+      end
+    end
+    describe '.user_id' do
+      context 'が空の場合' do
+        let (:stock) { FactoryGirl.build(:stock, :user_id => nil) }
+        it { stock.should_not be_valid }
+      end
     end
   end
 
