@@ -2,12 +2,12 @@
   <div class="stock_set">
     <% @stocks.each do |s| %>
     <div class='stock'>
-      <h2 class="title"><%= link_to s.post.title, "/posts/#{s.post.id.to_i}", p %></h2>
+      <h2 class="title"><%= link_to s.post.title, post_path(s.post.id) %></h2>
       <div class="main">
         <p class="body"><%= s.post.body %></p>
       </div>
       <div class="meta">
-        <span class="user_name">DummyToQoz</span>
+        <span class="user_name"><%= link_to s.post.user.name, user_path(s.post.user.name) %></span>
       </div>
     </div>
     <% end %>
