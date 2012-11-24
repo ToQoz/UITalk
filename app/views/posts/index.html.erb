@@ -20,6 +20,9 @@
       <div class="meta">
         <span class="user_name">DummyToQoz</span>
       </div>
+      <div class="menu">
+        <li><%= link_to "stock", user_stocks_path(:user_id => p.user.name, :post_id => p.id), :method => :post %></li>
+      </div>
     </div>
     <% end %>
   </div>
