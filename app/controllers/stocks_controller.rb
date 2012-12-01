@@ -33,7 +33,7 @@ class StocksController < ApplicationController
   end
 
   def check_privilege(stock)
-    if !stock.deletable_by?(stock.post_id, current_user.id)
+    if !stock.deletable_by?(stock.post_id, current_user)
       raise User::PrivilegeError
     end
   end

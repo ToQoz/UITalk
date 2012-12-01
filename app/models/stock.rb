@@ -13,8 +13,11 @@ class Stock < ActiveRecord::Base
   scope :for_user, lambda {|user_id| where("user_id = #{user_id.to_i}")}
   scope :recent, lambda { |n| limit(n).order('created_at DESC, id DESC') }
 
-  def deletable_by?(post_id, user_id)
-    if stocked_id_by?(post_id, user_id)
+  def deletable_by?(post_id, current_user)
+    if current_user.nil?
+      return false
+    end
+    if stocked_id_by?(post_id, current_user.id)
       true
     else
       false

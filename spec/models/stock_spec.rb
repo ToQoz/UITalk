@@ -56,7 +56,7 @@ describe Stock do
       let(:user) { FactoryGirl.create(:user) }
       let(:post) { FactoryGirl.create(:post, { user_id: user.id }) }
       let(:stock) { FactoryGirl.create(:stock, { user_id: user.id, post_id: post.id }) }
-      let(:deletable) { stock.deletable_by?(post.id, user.id) }
+      let(:deletable) { stock.deletable_by?(post.id, user) }
       it { deletable.should be_true }
     end
   end

@@ -10,7 +10,7 @@
         <span class="user_name"><%= link_to s.post.user.name, user_path(s.post.user.name) %></span>
       </div>
       <div class="menu">
-        <% if s.deletable_by?(s.post_id, current_user.id) %>
+        <% if s.deletable_by?(s.post_id, current_user) %>
           <li><%= link_to "Delete", post_stock_path(:post_id => s.post_id, :id => s.id), :method => :delete %></li>
         <% end %>
       </div>
