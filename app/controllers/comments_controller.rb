@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   end
 
   def check_privilege(comment)
-    if !comment.editable_by?(current_user.id, comment.user_id)
+    if !comment.editable_by?(comment.user_id, current_user)
       raise User::PrivilegeError
     end
   end

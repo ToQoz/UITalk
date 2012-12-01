@@ -18,7 +18,10 @@ class Comment < ActiveRecord::Base
     User.find_by_id(user_id).name
   end
 
-  def editable_by?(user_id, commented_user_id)
-    user_id == commented_user_id
+  def editable_by?(commented_user_id, current_user)
+    if current_user.nil?
+      return false
+    end
+    user_id == current_user.id
   end
 end
