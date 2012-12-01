@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.recent(40)
+    @stock = Stock.new
   end
 
   def show

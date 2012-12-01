@@ -14,10 +14,7 @@ class CommentEvaluationsController < ApplicationController
       comment_id: params[:comment_id],
       kind: params[:kind]
     })
-    if @comment_evaluation.save
-      redirect_to @post
-    else
-      render :template => "posts/show", :locals => {:post => @post, :comment => @comment}
-    end
+    @comment_evaluation.save
+    respond_with @comment_evaluation
   end
 end

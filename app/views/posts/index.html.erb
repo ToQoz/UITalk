@@ -20,6 +20,13 @@
       <div class="meta">
         <span class="user_name">DummyToQoz</span>
       </div>
+      <div class="menu">
+        <% if @stock.deletable_by?(p.id, current_user) %>
+        <li><%= link_to "Stock Delete", post_stock_path(:post_id => p.id, :id => @stock.stocked_id_by?(p.id, current_user.id)), :method => :delete %></li>
+        <% else %>
+        <li><%= link_to "Stock", post_stocks_path(:post_id => p.id), :method => :post %></li>
+        <% end %>
+      </div>
     </div>
     <% end %>
   </div>
