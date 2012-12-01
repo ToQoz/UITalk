@@ -34,7 +34,7 @@ describe Comment do
 
   describe "#editable_by?" do
     context 'は、コメントのユーザIDとコメントを作成したユーザIDが等しい場合、' do
-      before { @editable = comment.editable_by?(comment.user_id, user.id) }
+      before { @editable = comment.editable_by?(comment.user_id, user) }
       it { @editable.should be_true }
     end
   end

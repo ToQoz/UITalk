@@ -27,7 +27,7 @@
         </div>
         <div class="menu">
           <ul>
-            <% if comment.editable_by?(comment.user_id, current_user.id) %>
+            <% if comment.editable_by?(comment.user_id, current_user) %>
             <li><%= link_to "Delete", comment_path(:id => comment.id), :confirm => "Do you really want to delete this comment?", :method => :delete %></li>
             <% end %>
             <li><%= link_to "good", comment_evaluations_path(:comment_id => comment.id, :kind => 1), :method => :post %></li>
