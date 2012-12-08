@@ -56,8 +56,18 @@ class Post < ActiveRecord::Base
     end
   end
 
+  module EditionMethods
+    def editable_by?(posted_user_id, current_user)
+      if current_user.nil?
+        return false
+      end
+      posted_user_id == current_user.id
+    end
+  end
+
   include ImageMethods
   include TagMethods
   include PostsTagsMethods
+  include EditionMethods
 
 end

@@ -33,4 +33,17 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @post = Post.find(params[:id])
+    check_privilege(@post)
+    @post.destroy
+    respond_with @post
+  end
+
+  def check_privilege(post)
+    if !post.editable_by?(post.user_id, current_user)
+      raise User::PrivilegeError
+    end
+  end
 end
