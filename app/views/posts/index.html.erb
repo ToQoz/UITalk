@@ -29,6 +29,8 @@
         <% if p.editable_by?(p.user_id, current_user) %>
         <li><%= link_to "Delete", post_path(:id => p.id), :method => :delete %></li>
         <% end %>
+        <li><%= link_to "good", post_evaluations_path(:post_id => p.id, :kind => 1), :method => :post %></li>
+        <li><%= link_to "bad", post_evaluations_path(:post_id => p.id, :kind => 2), :method => :post %></li>
       </div>
     </div>
     <% end %>
