@@ -22,6 +22,6 @@ class Comment < ActiveRecord::Base
     if current_user.nil?
       return false
     end
-    user_id == current_user.id
+    commented_user_id == current_user.id
   end
 end
