@@ -18,5 +18,9 @@ class PostEvaluation < ActiveRecord::Base
   scope :good, where(kind: '1')
   scope :bad, where(kind: '2')
 
+  def evaluable_by?(post_id, user_id)
+    PostEvaluation.find_by_post_id(post_id).user_id != user_id
+  end
+
   include Evaluation
 end

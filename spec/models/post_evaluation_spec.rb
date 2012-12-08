@@ -83,4 +83,12 @@ describe PostEvaluation do
       end
     end
   end
+
+  describe '#evaluable_by?' do
+    context '投稿IDとユーザIDのデータが存在する場合' do
+      let (:eval) { FactoryGirl.create(:good_kind_post_eval) }
+      let (:evaluable) { eval.evaluable_by?(eval.post_id, eval.user_id) }
+      it { evaluable.should be_false }
+    end
+  end
 end
