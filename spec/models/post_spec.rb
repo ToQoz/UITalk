@@ -56,4 +56,13 @@ describe Post do
       it { should_not be_valid }
     end
   end
+
+  describe "#editable_by?" do
+    context '投稿したユーザIDとユーザIDが等しい場合' do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:post) { FactoryGirl.create(:post, { user_id: user.id }) }
+      let(:editable) { post.editable_by?(post.user_id, user) }
+      it { editable.should be_true }
+    end
+  end
 end

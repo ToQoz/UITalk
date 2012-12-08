@@ -26,6 +26,9 @@
         <% else %>
         <li><%= link_to "Stock", post_stocks_path(:post_id => p.id), :method => :post %></li>
         <% end %>
+        <% if p.editable_by?(p.user_id, current_user) %>
+        <li><%= link_to "Delete", post_path(:id => p.id), :method => :delete %></li>
+        <% end %>
       </div>
     </div>
     <% end %>
