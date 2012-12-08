@@ -12,6 +12,7 @@ class PostEvaluation < ActiveRecord::Base
   attr_accessible :available, :post_id, :kind, :user_id
 
   validate :kind_valid?
+  validates :user_id, :presence => true, :uniqueness => { :scope => :post_id, :message => "has already evaluated for this post" }
 
   default_scope where(available: true)
   scope :good, where(kind: '1')
